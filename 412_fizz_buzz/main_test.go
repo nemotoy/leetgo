@@ -9,13 +9,14 @@ import (
 func fizzBuzz_old(n int) []string {
 	var ss []string
 	for i := 1; i <= n; i++ {
-		if i%3 == 0 && i%5 == 0 {
+		switch {
+		case i%3 == 0 && i%5 == 0:
 			ss = append(ss, "FizzBuzz")
-		} else if i%3 == 0 {
+		case i%3 == 0:
 			ss = append(ss, "Fizz")
-		} else if i%5 == 0 {
+		case i%5 == 0:
 			ss = append(ss, "Buzz")
-		} else {
+		default:
 			ss = append(ss, strconv.Itoa(i))
 		}
 	}
@@ -26,13 +27,14 @@ func fizzBuzz(n int) []string {
 	var ss []string
 	for i := 1; i <= n; i++ {
 		s := ""
-		if i%3 == 0 && i%5 == 0 {
+		switch {
+		case i%3 == 0 && i%5 == 0:
 			s = "FizzBuzz"
-		} else if i%3 == 0 {
+		case i%3 == 0:
 			s = "Fizz"
-		} else if i%5 == 0 {
+		case i%5 == 0:
 			s = "Buzz"
-		} else {
+		default:
 			s = strconv.Itoa(i)
 		}
 		ss = append(ss, s)
