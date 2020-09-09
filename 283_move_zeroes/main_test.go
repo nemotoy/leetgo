@@ -6,6 +6,13 @@ import (
 	"testing"
 )
 
+/*
+	## memo
+	- 0の個数をカウントする
+	- 個数分の0を含むリストを作る
+	- 与えられたリストから要素0を削除する（ ※ incrementと要素がズレる）
+	- リストとリストを結合する
+*/
 func moveZeroes(nums []int) {
 	incList := []int{}
 	for i, n := range nums {
@@ -14,21 +21,27 @@ func moveZeroes(nums []int) {
 			incList = append(incList, i)
 		}
 	}
-	fmt.Printf("#2 increment list: %v, nums: %v\n", incList, nums)
-	for i, inc := range incList {
-		fmt.Printf("#3 nums: %v, length: %d, inc: %d\n", nums, len(nums), inc)
-		if len(nums)-1 == inc {
-			continue
-		}
-		if i != 0 {
-			inc--
-		}
-		if nums[inc] == 0 {
-			nums = append(nums[:inc], nums[inc+1:]...)
-			nums = append(nums, 0)
-			fmt.Printf("#3.5 nums: %v\n", nums)
+	count := len(incList)
+	fmt.Printf("#1 count: %d\n", len(incList))
+	zeroList := make([]int, count)
+	for count < 0 {
+		zeroList = append(zeroList, 0)
+		count--
+	}
+	fmt.Printf("#2 zero list: %v\n", zeroList)
+
+	base := 0
+	for _, n := range incList {
+		fmt.Printf("#3 n: %d, nums: %v\n", n, nums)
+		n = n - base
+		if nums[n] == 0 {
+			fmt.Printf("Prev; %v, %v\n", nums[:n], nums[n+1:])
+			nums = append(nums[:n], nums[n+1:]...)
+			fmt.Printf("follow; nums: %v\n", nums)
+			base++
 		}
 	}
+	nums = append(nums, zeroList...)
 	fmt.Printf("#4 nums: %v\n", nums)
 }
 
@@ -56,6 +69,10 @@ func Test_fizzBuzz(t *testing.T) {
 		{
 			[]int{1, 0, 1},
 			[]int{1, 1, 0},
+		},
+		{
+			[]int{4, 2, 4, 0, 0, 3, 0, 5, 1, 0},
+			[]int{4, 2, 4, 3, 5, 1, 0, 0, 0, 0},
 		},
 	}
 	for _, tt := range tests {
