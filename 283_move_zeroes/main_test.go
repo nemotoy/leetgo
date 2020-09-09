@@ -30,7 +30,7 @@ func moveZeroes(nums []int) {
 	base := 0
 	for _, n := range incList {
 		// インクリメントをリフレッシュする
-		n = n - base
+		n -= base
 		if nums[n] == 0 {
 			// 対象の要素を削除する
 			nums = append(nums[:n], nums[n+1:]...)
