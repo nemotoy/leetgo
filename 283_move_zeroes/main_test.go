@@ -15,12 +15,12 @@ func moveZeroes(nums []int) {
 		}
 	}
 	fmt.Printf("#2 increment list: %v, nums: %v\n", incList, nums)
-	for _, inc := range incList {
+	for i, inc := range incList {
 		fmt.Printf("#3 nums: %v, length: %d, inc: %d\n", nums, len(nums), inc)
 		if len(nums)-1 == inc {
 			continue
 		}
-		if inc != 0 {
+		if i != 0 {
 			inc--
 		}
 		if nums[inc] == 0 {
@@ -52,6 +52,10 @@ func Test_fizzBuzz(t *testing.T) {
 		{
 			[]int{1, 0, 0},
 			[]int{1, 0, 0},
+		},
+		{
+			[]int{1, 0, 1},
+			[]int{1, 1, 0},
 		},
 	}
 	for _, tt := range tests {
