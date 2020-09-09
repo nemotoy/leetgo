@@ -12,7 +12,8 @@ import (
 	out: 最大利益
 	基本的には安い時に買って、高い時に売るが本筋。
 
-	- 配列が昇順の場合は0
+	- 配列が降順の場合は 0
+	- 配列が昇順の場合は r-l
 	- 配列の最大値と最小値を求める
 		- indexが max < min の場合はNG
 	- 両端から評価して、l > r ならr-1する
@@ -21,6 +22,20 @@ func maxProfit(prices []int) int {
 
 	max, min := 0, 0
 	l, r := 0, len(prices)-1
+	isAsc := true
+	for i, p := range prices {
+		if i == r {
+			break
+		}
+		if p > prices[i+1] {
+			isAsc = false
+			break
+		}
+	}
+	if isAsc {
+		return prices[r] - prices[l]
+	}
+
 	for l < r {
 		switch {
 		case prices[l] == prices[r]:
@@ -45,6 +60,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			[]int{7, 1, 5, 3, 6, 4},
 			7,
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			4,
 		},
 	}
 	for _, tt := range tests {
