@@ -7,42 +7,37 @@ import (
 )
 
 /*
-	## memo
+	## summary
 	- 0の個数をカウントする
 	- 個数分の0を含むリストを作る
-	- 与えられたリストから要素0を削除する（ ※ incrementと要素がズレる）
-	- リストとリストを結合する
+	- 与えられたリストから要素0を削除する
+	- リスト同士を結合する
 */
 func moveZeroes(nums []int) {
 	incList := []int{}
 	for i, n := range nums {
-		fmt.Printf("#1 inc: %d, nums: %v\n", i, nums)
 		if n == 0 {
 			incList = append(incList, i)
 		}
 	}
 	count := len(incList)
-	fmt.Printf("#1 count: %d\n", len(incList))
 	zeroList := make([]int, count)
 	for count < 0 {
 		zeroList = append(zeroList, 0)
 		count--
 	}
-	fmt.Printf("#2 zero list: %v\n", zeroList)
 
 	base := 0
 	for _, n := range incList {
-		fmt.Printf("#3 n: %d, nums: %v\n", n, nums)
+		// インクリメントをリフレッシュする
 		n = n - base
 		if nums[n] == 0 {
-			fmt.Printf("Prev; %v, %v\n", nums[:n], nums[n+1:])
+			// 対象の要素を削除する
 			nums = append(nums[:n], nums[n+1:]...)
-			fmt.Printf("follow; nums: %v\n", nums)
 			base++
 		}
 	}
 	nums = append(nums, zeroList...)
-	fmt.Printf("#4 nums: %v\n", nums)
 }
 
 func Test_fizzBuzz(t *testing.T) {
