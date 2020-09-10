@@ -47,21 +47,25 @@ func maxProfit(prices []int) int {
 			break
 		}
 
-		// 山の登斜を見つける
+		// 山の登斜か評価する
 		if p < prices[i+1] {
+			// 次点以降が山か谷かを評価する。谷の基底値はi。
+			// nextは次々点の基底値。
 			next := 2
 			for {
-				fmt.Printf("val: %d, inc: %d, len: %d\n", p, i, next)
+				fmt.Printf("val: %d, inc: %d, val: %d, next: %d\n", p, i, prices[i], next)
 				switch {
-				case r-i < next:
+				case r-i < next: // リストサイズを超過した場合
 					fmt.Printf("#1 Profit: %d, Add: %d\n", prof, prices[i+next-1]-prices[i+1])
-					// prof += prices[i+next-1] - prices[i+1]
-				case prices[i+next-1] < prices[i+next]: // 登斜の場合は継続
+					prof += prices[i+next-1] - prices[i]
+				case prices[i+next-1] < prices[i+next]: // 登斜の場合は評価継続
+					fmt.Printf("#2 increase next size: %d, next: %d\n", i, next)
 					next++
 					continue
-				case prices[i+next-1] > prices[i+next]: // 降斜の場合は利益決定
-					fmt.Printf("#3 Profit: %d, Add: %d\n", prof, prices[i+next-1]-prices[i+1])
-					prof += prices[i+next-1] - prices[i+1]
+				case prices[i+next-1] > prices[i+next]: // 降斜の場合は利益確定
+					fmt.Printf("#3 inc: %d, next: %d\n", i, next)
+					prof += prices[i+next-1] - prices[i]
+					fmt.Printf("#3 Profit: %d, Buy: %d, Sell: %d\n", prof, prices[i], prices[i+next-1])
 				}
 				break
 			}
