@@ -42,13 +42,21 @@ func maxProfit(prices []int) int {
 	}
 
 	prof := 0
+	skipped := 0
 	for i, p := range prices {
-		if i == r-1 {
+		if i == r {
 			break
 		}
 
 		// 山の登斜か評価する
 		if p < prices[i+1] {
+
+			fmt.Printf("Skip: %d, %d\n", i, skipped)
+			// // 評価し終わったインデックスを超過するまで後続処理をスキップする。
+			if i < skipped {
+				fmt.Printf("Skip: %d, %d\n", i, skipped)
+				continue
+			}
 			// 次点以降が山か谷かを評価する。谷の基底値はi。
 			// nextは次々点の基底値。
 			next := 2
@@ -56,8 +64,10 @@ func maxProfit(prices []int) int {
 				fmt.Printf("val: %d, inc: %d, val: %d, next: %d\n", p, i, prices[i], next)
 				switch {
 				case r-i < next: // リストサイズを超過した場合
-					fmt.Printf("#1 Profit: %d, Add: %d\n", prof, prices[i+next-1]-prices[i+1])
+					fmt.Printf("#1 Profit: %d, Buy: %d, Sell: %d\n", prof, prices[i], prices[i+next-1])
 					prof += prices[i+next-1] - prices[i]
+					skipped = 0
+					skipped = i + next
 				case prices[i+next-1] < prices[i+next]: // 登斜の場合は評価継続
 					fmt.Printf("#2 increase next size: %d, next: %d\n", i, next)
 					next++
@@ -66,6 +76,9 @@ func maxProfit(prices []int) int {
 					fmt.Printf("#3 inc: %d, next: %d\n", i, next)
 					prof += prices[i+next-1] - prices[i]
 					fmt.Printf("#3 Profit: %d, Buy: %d, Sell: %d\n", prof, prices[i], prices[i+next-1])
+					skipped = 0
+					skipped = i + next
+					fmt.Printf("#3 Skipped until index: %d\n", skipped)
 				}
 				break
 			}
@@ -99,10 +112,10 @@ func TestMaxProfit(t *testing.T) {
 			[]int{1, 4, 2},
 			3,
 		},
-		// {
-		// 	[]int{1, 3, 2, 2, 4, 1, 5},
-		// 	8,
-		// },
+		{
+			[]int{2, 1, 4},
+			3,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
