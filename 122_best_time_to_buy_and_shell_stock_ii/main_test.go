@@ -22,18 +22,23 @@ func maxProfit(prices []int) int {
 
 	max, min := 0, 0
 	l, r := 0, len(prices)-1
-	isAsc := true
+	isAsc, isDesc := true, true
 	for i, p := range prices {
 		if i == r {
 			break
 		}
 		if p > prices[i+1] {
 			isAsc = false
-			break
+		}
+		if p < prices[i+1] {
+			isDesc = false
 		}
 	}
 	if isAsc {
 		return prices[r] - prices[l]
+	}
+	if isDesc {
+		return 0
 	}
 
 	for l < r {
@@ -64,6 +69,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			[]int{1, 2, 3, 4, 5},
 			4,
+		},
+		{
+			[]int{7, 6, 4, 3, 1},
+			0,
 		},
 	}
 	for _, tt := range tests {
