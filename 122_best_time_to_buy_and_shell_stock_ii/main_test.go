@@ -46,17 +46,21 @@ func maxProfit(prices []int) int {
 		if i == r-1 {
 			break
 		}
-		// find a valley
-		if p > prices[i+1] {
+
+		// 山の登斜を見つける
+		if p < prices[i+1] {
 			next := 2
 			for {
+				fmt.Printf("val: %d, inc: %d, len: %d\n", p, i, next)
 				switch {
 				case r-i < next:
-					prof += prices[i+next-1] - prices[i+1]
-				case prices[i+next-1] < prices[i+next]:
+					fmt.Printf("#1 Profit: %d, Add: %d\n", prof, prices[i+next-1]-prices[i+1])
+					// prof += prices[i+next-1] - prices[i+1]
+				case prices[i+next-1] < prices[i+next]: // 登斜の場合は継続
 					next++
 					continue
-				case prices[i+next-1] > prices[i+next]:
+				case prices[i+next-1] > prices[i+next]: // 降斜の場合は利益決定
+					fmt.Printf("#3 Profit: %d, Add: %d\n", prof, prices[i+next-1]-prices[i+1])
 					prof += prices[i+next-1] - prices[i+1]
 				}
 				break
@@ -87,6 +91,14 @@ func TestMaxProfit(t *testing.T) {
 			[]int{6, 1, 3, 2, 4, 7}, // 1. buy day2(1) sell day3(3) profit = 2; 2. buy day4(2) sell day6(7) profit = 5; amount = 7
 			7,
 		},
+		{
+			[]int{1, 4, 2},
+			3,
+		},
+		// {
+		// 	[]int{1, 3, 2, 2, 4, 1, 5},
+		// 	8,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
