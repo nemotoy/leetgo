@@ -21,26 +21,7 @@ import (
 */
 func maxProfit(prices []int) int {
 
-	l, r := 0, len(prices)-1
-	isAsc, isDesc := true, true
-	for i, p := range prices {
-		if i == r {
-			break
-		}
-		if p > prices[i+1] {
-			isAsc = false
-		}
-		if p < prices[i+1] {
-			isDesc = false
-		}
-	}
-	if isAsc {
-		return prices[r] - prices[l]
-	}
-	if isDesc {
-		return 0
-	}
-
+	r := len(prices) - 1
 	prof := 0
 	skipped := 0
 	for i, p := range prices {
@@ -51,7 +32,6 @@ func maxProfit(prices []int) int {
 		// 山の登斜か評価する
 		if p < prices[i+1] {
 
-			fmt.Printf("Skip: %d, %d\n", i, skipped)
 			// // 評価し終わったインデックスを超過するまで後続処理をスキップする。
 			if i < skipped {
 				fmt.Printf("Skip: %d, %d\n", i, skipped)
