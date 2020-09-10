@@ -21,7 +21,6 @@ import (
 */
 func maxProfit(prices []int) int {
 
-	max, min := 0, 0
 	l, r := 0, len(prices)-1
 	isAsc, isDesc := true, true
 	for i, p := range prices {
@@ -42,20 +41,29 @@ func maxProfit(prices []int) int {
 		return 0
 	}
 
-	for l < r {
-		switch {
-		case prices[l] == prices[r]:
-			l, r = l+1, r-1
-		case prices[l] > prices[r]:
-			max = prices[l]
-			r--
-		case prices[l] < prices[r]:
-			min = prices[r]
-			l++
+	prof := 0
+	for i, p := range prices {
+		if i == r-1 {
+			break
+		}
+		// find a valley
+		if p > prices[i+1] {
+			next := 2
+			for {
+				switch {
+				case r-i < next:
+					prof += prices[i+next-1] - prices[i+1]
+				case prices[i+next-1] < prices[i+next]:
+					next++
+					continue
+				case prices[i+next-1] > prices[i+next]:
+					prof += prices[i+next-1] - prices[i+1]
+				}
+				break
+			}
 		}
 	}
-
-	return max - min
+	return prof
 }
 
 func TestMaxProfit(t *testing.T) {
