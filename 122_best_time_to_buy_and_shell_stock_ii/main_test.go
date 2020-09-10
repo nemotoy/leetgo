@@ -10,61 +10,33 @@ import (
 	## summary
 	in:要素が価格、インデックスが日の配列
 	out: 最大利益
-	基本的には安い時に買って、高い時に売るが本筋。
 
-	- 配列が降順の場合は 0
-	- 配列が昇順の場合は r-l
-	- 配列の最大値と最小値を求める
-		- indexが max < min の場合はNG
-	- 両端から評価して、l > r ならr-1する
-	- 複数回購入・売却する場合
+	- 購入・売却・利益・サイズを定義する
+	- 始点がサイズを超過するまでイテレートする
+		- 山の登斜を見つけるまで購入始点を進める
+		- 同始点まで売却始点を進める
+		- 山の降斜を見つけるまで売却始点を進める
+		- 利益を算出する
+		- 購入始点を売却始点の次点に変更する。
 */
 func maxProfit(prices []int) int {
-
-	r := len(prices) - 1
-	prof := 0
-	skipped := 0
-	for i, p := range prices {
-		if i == r {
-			break
+	buy := 0
+	sell := 0
+	profit := 0
+	n := len(prices)
+	for buy < n && sell < n {
+		for buy+1 < n && prices[buy+1] < prices[buy] {
+			buy++
+		}
+		sell = buy
+		for sell+1 < n && prices[sell+1] > prices[sell] {
+			sell++
 		}
 
-		// 山の登斜か評価する
-		if p < prices[i+1] {
-
-			// // 評価し終わったインデックスを超過するまで後続処理をスキップする。
-			if i < skipped {
-				fmt.Printf("Skip: %d, %d\n", i, skipped)
-				continue
-			}
-			// 次点以降が山か谷かを評価する。谷の基底値はi。
-			// nextは次々点の基底値。
-			next := 2
-			for {
-				fmt.Printf("val: %d, inc: %d, val: %d, next: %d\n", p, i, prices[i], next)
-				switch {
-				case r-i < next: // リストサイズを超過した場合
-					fmt.Printf("#1 Profit: %d, Buy: %d, Sell: %d\n", prof, prices[i], prices[i+next-1])
-					prof += prices[i+next-1] - prices[i]
-					skipped = 0
-					skipped = i + next
-				case prices[i+next-1] < prices[i+next]: // 登斜の場合は評価継続
-					fmt.Printf("#2 increase next size: %d, next: %d\n", i, next)
-					next++
-					continue
-				case prices[i+next-1] > prices[i+next]: // 降斜の場合は利益確定
-					fmt.Printf("#3 inc: %d, next: %d\n", i, next)
-					prof += prices[i+next-1] - prices[i]
-					fmt.Printf("#3 Profit: %d, Buy: %d, Sell: %d\n", prof, prices[i], prices[i+next-1])
-					skipped = 0
-					skipped = i + next
-					fmt.Printf("#3 Skipped until index: %d\n", skipped)
-				}
-				break
-			}
-		}
+		profit += prices[sell] - prices[buy]
+		buy = sell + 1
 	}
-	return prof
+	return profit
 }
 
 func TestMaxProfit(t *testing.T) {
@@ -95,6 +67,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			[]int{2, 1, 4},
 			3,
+		},
+		{
+			[]int{5, 2, 3, 2, 6, 6, 2, 9, 1, 0, 7, 4, 5, 0},
+			20,
 		},
 	}
 	for _, tt := range tests {
