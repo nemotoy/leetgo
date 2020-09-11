@@ -5,22 +5,22 @@ import (
 	"testing"
 )
 
+/*
+	## summary
+	- 重複した値は3回以上エントリされない
+	- 重複しない値は必ず1つである
+*/
 func singleNumber(nums []int) int {
 
-	dup := []int{}
 	table := make(map[int]int)
-	for _, v := range nums {
-		if _, ok := table[v]; ok {
-			dup = append(dup, v)
-			continue
-		}
-		table[v] = v
-	}
-	for _, v := range dup {
-		if _, ok := table[v]; ok {
-			delete(table, v)
+	for _, nums := range nums {
+		if vt, ok := table[nums]; !ok { // 重複なし
+			table[nums] = 1
+		} else if vt == 1 { // 重複あり
+			delete(table, nums)
 		}
 	}
+	// テーブルの要素（長さ）は必ず 1
 	for v := range table {
 		return v
 	}
