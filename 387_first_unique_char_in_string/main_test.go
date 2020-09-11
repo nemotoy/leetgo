@@ -14,7 +14,8 @@ import (
 */
 func firstUniqChar(s string) int {
 
-	size := len(s)
+	// 最後尾は処理しない
+	size := len(s) - 1
 	for i := 0; i < size; i++ {
 		f := false
 		fmt.Printf("size: %d, s: %s\n", size, s[i:])
