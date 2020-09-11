@@ -22,14 +22,12 @@ func firstUniqChar(s string) int {
 	// 最後尾は処理対象外
 	for i := 0; i < size-1; i++ {
 		f := false
-		fmt.Printf("size: %d, s: %s\n", size, s[i:])
-		// 基底値の次要素以降を対象
-		for sindex, r := range s[i+1:] {
-			fmt.Printf("bindex: %d, val: %s, sindex: %d, val: %s\n", i, string(s[i]), sindex, string(r))
+		// indexを除いた文字列を作る
+		ss := s[:i] + s[i+1:]
+		for _, r := range ss {
 			// 基底indexのruneと同値ならiterationを抜ける
 			if r == rune(s[i]) {
 				f = true
-				fmt.Println(string(r), sindex, string(s[i]), f)
 				break
 			}
 		}
@@ -61,6 +59,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			"z",
 			0,
+		},
+		{
+			"aadadaad",
+			-1,
 		},
 	}
 	for _, tt := range tests {
