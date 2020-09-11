@@ -7,23 +7,24 @@ import (
 
 func singleNumber(nums []int) int {
 
-	i := 0
-	up := 0
-	n := len(nums)
-	for i < n {
-		switch {
-		case up < nums[i]:
-			up = nums[i]
-		case up == nums[i]:
-			up = 0
-		case up > nums[i]:
-			if up == 0 {
-				up = nums[i]
-			}
+	dup := []int{}
+	table := make(map[int]int)
+	for _, v := range nums {
+		if _, ok := table[v]; ok {
+			dup = append(dup, v)
+			continue
 		}
-		i++
+		table[v] = v
 	}
-	return up
+	for _, v := range dup {
+		if _, ok := table[v]; ok {
+			delete(table, v)
+		}
+	}
+	for v := range table {
+		return v
+	}
+	return 0
 }
 
 func TestSingleNumber(t *testing.T) {
@@ -36,6 +37,10 @@ func TestSingleNumber(t *testing.T) {
 		},
 		{
 			[]int{4, 1, 2, 1, 2}, 4,
+		},
+		{
+			[]int{1, 3, 1, -1, 3},
+			-1,
 		},
 	}
 	for _, tt := range tests {
