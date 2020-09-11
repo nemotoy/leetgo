@@ -14,9 +14,13 @@ import (
 */
 func firstUniqChar(s string) int {
 
-	// 最後尾は処理しない
-	size := len(s) - 1
-	for i := 0; i < size; i++ {
+	size := len(s)
+	// 1文字なら0を返す
+	if size == 1 {
+		return 0
+	}
+	// 最後尾は処理対象外
+	for i := 0; i < size-1; i++ {
 		f := false
 		fmt.Printf("size: %d, s: %s\n", size, s[i:])
 		// 基底値の次要素以降を対象
@@ -53,6 +57,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			"cc",
 			-1,
+		},
+		{
+			"z",
+			0,
 		},
 	}
 	for _, tt := range tests {
