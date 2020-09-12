@@ -8,10 +8,10 @@ import (
 
 /*
 	## summary
+	- 1文字ならindex 0 を返す
 	- 先頭から1つずつ取り出して、全件検索
 		- 同値がなければindexを保存
 	- 全て見つからなければ-1を返す
-	- 1文字ならindex 0 を返す
 */
 func firstUniqChar(s string) int {
 
@@ -20,7 +20,6 @@ func firstUniqChar(s string) int {
 	if size == 1 {
 		return 0
 	}
-	// 最後尾は処理対象外
 	for i := 0; i < size; i++ {
 		f := false
 		// indexを除いた文字列を作る
@@ -40,7 +39,7 @@ func firstUniqChar(s string) int {
 	return -1
 }
 
-func TestMaxProfit(t *testing.T) {
+func TestFirstUniqChar(t *testing.T) {
 	tests := []struct {
 		in  string
 		out int
