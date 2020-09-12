@@ -11,6 +11,7 @@ import (
 	- 先頭から1つずつ取り出して、全件検索
 		- 同値がなければindexを保存
 	- 全て見つからなければ-1を返す
+	- 1文字ならindex 0 を返す
 */
 func firstUniqChar(s string) int {
 
@@ -20,7 +21,7 @@ func firstUniqChar(s string) int {
 		return 0
 	}
 	// 最後尾は処理対象外
-	for i := 0; i < size-1; i++ {
+	for i := 0; i < size; i++ {
 		f := false
 		// indexを除いた文字列を作る
 		ss := s[:i] + s[i+1:]
@@ -63,6 +64,10 @@ func TestMaxProfit(t *testing.T) {
 		{
 			"aadadaad",
 			-1,
+		},
+		{
+			"dddccdbba",
+			8,
 		},
 	}
 	for _, tt := range tests {
