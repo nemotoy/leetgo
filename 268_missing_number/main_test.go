@@ -12,12 +12,9 @@ import (
 	- 最大値 n を決める
 	- 0からnまでのリストあるいはマップを作る
 	- 与えられたint型リストをイテレーションし、存在するか検索する
+	- 0~nまで揃っていたら、n+1を返す
 */
 func missingNumber(nums []int) int {
-
-	if len(nums) == 1 && nums[0] == 0 {
-		return 1
-	}
 
 	max := 0
 	for i := 0; i < len(nums); i++ {
@@ -33,9 +30,14 @@ func missingNumber(nums []int) int {
 	}
 
 	for _, num := range nums {
-		if _, ok := m[num]; ok {
+		_, ok := m[num]
+		if ok {
 			delete(m, num)
 		}
+	}
+
+	if len(m) == 0 {
+		return max + 1
 	}
 
 	for v := range m {
@@ -61,6 +63,10 @@ func TestMissingNumber(t *testing.T) {
 		{
 			[]int{0},
 			1,
+		},
+		{
+			[]int{0, 1},
+			2,
 		},
 	}
 	for _, tt := range tests {
