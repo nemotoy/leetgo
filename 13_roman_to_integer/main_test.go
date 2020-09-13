@@ -8,9 +8,28 @@ import (
 
 /*
 	## summary
+	- 基本的に大きい数字が左から並ぶ
+		- 4はIIIIではなく、IVと書く
 */
 func romanToInt(s string) int {
-	return 0
+	result := 0
+	for _, r := range s {
+		v, ok := romanNumerals[string(r)]
+		if ok {
+			result += v
+		}
+	}
+	return result
+}
+
+var romanNumerals = map[string]int{
+	"I": 1,
+	"V": 5,
+	"X": 10,
+	"L": 50,
+	"C": 100,
+	"D": 500,
+	"M": 1000,
 }
 
 func TestMaxProfit(t *testing.T) {
