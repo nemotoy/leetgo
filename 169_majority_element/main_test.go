@@ -10,47 +10,32 @@ import (
 /*
 	## summary
 	サイズnの配列から最大値を探索する。
-		- 最大値はn/2回含まれる
+		- 最大値はn/2個以上含まれる
 		- 空配列は与えられない
 
 	- 配列の中の最大値を求める → 降順にする。
 	- 配列サイズ/2の個数が含まれているかを見る → 降順後の配列をループして個数を数える
+	- 最大値の個数 < n/2 である場合は対象外
 */
 func majorityElement(nums []int) int {
 
-	// 降順
+	// 降順にする
 	sort.Slice(nums, func(i, j int) bool {
 		return nums[i] > nums[j]
 	})
-	fmt.Println(nums)
-	var size = len(nums) / 2
-	fmt.Println("size: ", size)
-
-	count := []int{}
-	for i, n := range nums {
-		fmt.Println("inc: ", i)
-		prev := i - 1
-		// 0番目の場合
-		if prev == -1 {
-			count = append(count, n)
-			continue
-		}
-		// 前要素と同値の場合
-		if n == nums[prev] {
-			count = append(count, n)
-		} else {
-			// 同値でない場合
-			fmt.Println("count: , size: ", len(count), size)
-			// sizeより大きければ返す
-			if len(count) > size {
-				fmt.Println("val: ", count)
-				return count[0]
+	size := len(nums)
+	comparedItemNumber := float64(size) / float64(2)
+	var count float64
+	for i := 0; i < size; i++ {
+		for _, num := range nums {
+			if nums[i] == num {
+				count++
 			}
-			// それ以外はその要素でリセットする
-			count = []int{}
-			count = append(count, n)
-			fmt.Println("val: ", count)
 		}
+		if count > comparedItemNumber {
+			return nums[i]
+		}
+		count = 0
 	}
 	return 0
 }
