@@ -22,7 +22,7 @@ func romanToInt(s string) int {
 	size := len(s)
 	for i := 0; i < size; i++ {
 		ele := string(s[i])
-		v, ok := romanNumerals[string(ele)]
+		v, ok := romanNumerals[ele]
 		if ok {
 			if i+1 < size {
 				switch ele {
