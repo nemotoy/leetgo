@@ -30,7 +30,6 @@ func romanToInt(s string) int {
 					if string(s[i+1]) == "V" {
 						v = 4
 						i++
-						fmt.Println("#I", v, s)
 					} else if string(s[i+1]) == "X" {
 						v = 9
 						i++
