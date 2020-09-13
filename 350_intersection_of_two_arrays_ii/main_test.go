@@ -9,7 +9,10 @@ import (
 /*
 	## summary
 	2つの配列に含まれる整数を配列にして返す。同値は個別に扱う。
-	- 配列の長さを小さい方を元に、iterationする。
+	- 配列の長さを短い方を元に、iterationする。
+	- 単純化のため、返す配列は新規で割り当てる。
+
+	- 返す配列は、長さの短い方から長い方に存在しない要素を削除し、返す方法も検討可能。
 */
 func intersect(nums1 []int, nums2 []int) []int {
 
@@ -19,32 +22,23 @@ func intersect(nums1 []int, nums2 []int) []int {
 
 	if n1Size >= n2Size {
 		for _, num2 := range nums2 {
-			f := false
 			for i1, num1 := range nums1 {
 				if num2 == num1 {
-					f = true
 					// nums1から該当要素を除外する
 					nums1 = append(nums1[:i1], nums1[i1+1:]...)
+					result = append(result, num2)
 					break
 				}
-			}
-			if f {
-				result = append(result, num2)
-				fmt.Println(result)
 			}
 		}
 	} else {
 		for _, num1 := range nums1 {
-			f := false
 			for i2, num2 := range nums2 {
 				if num2 == num1 {
-					f = true
 					nums2 = append(nums2[:i2], nums2[i2+1:]...)
+					result = append(result, num1)
 					break
 				}
-			}
-			if f {
-				result = append(result, num1)
 			}
 		}
 	}
