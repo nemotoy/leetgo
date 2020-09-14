@@ -21,13 +21,16 @@ for i, r := range s {
 
 ### 配列操作
 
+Goでは配列ではなくスライス。
+
 ```golang
 
 var nums = []int{1,2,3,4,5}
 var size = len(nums)
 
 // 配列の各要素への処理
-// numsをfor rangeで処理することも可能だが、incrementの操作ができない
+// numsをfor rangeで処理することも可能だが、indexの操作ができない
+// numsの要素数は5で、長さは5。iは0から4まで処理する。
 for i := 0; i < size; i++ {
   v := nums[i]
   if v == 100 {
@@ -36,6 +39,12 @@ for i := 0; i < size; i++ {
   i++
 }
 
+// 配列から指定のindexの要素を削除する
+nums := []int{1, 2, 3, 4, 5}
+i := 2
+nums = append(nums[:i], nums[i+1:]...)
+
+fmt.Println("expeted: [1 2 4 5], got: ",nums)
 ```
 
 ## References
