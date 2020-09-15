@@ -29,21 +29,16 @@ func titleToNumber(s string) int {
 	}
 	nums := make([]int, 0, len(s))
 	for _, r := range s {
-		num := alphabetToNumber(r)
-		nums = append(nums, num)
+		nums = append(nums, alphabetToNumber(r))
 	}
 	result := 0
 	len := len(nums)
-	// 1の位以外は、 nの桁数-1乗して加算する。
 	for i, n := range nums {
-		// 1の位
 		if i == len-1 {
 			result += n
 			break
 		}
-		count := len - (1 + i)
-		tmp := multiplier(lettersLen, count)
-		result += tmp * n
+		result += multiplier(lettersLen, len-(1+i)) * n
 	}
 	return result
 }
@@ -51,6 +46,8 @@ func titleToNumber(s string) int {
 const alphabetLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const lettersLen = len(alphabetLetter)
 
+// TODO: 乗数を返す関数であれば、(n,count)=(9,1)なら9を返さないといけない。
+// nの乗数（count）を返す
 func multiplier(n, count int) int {
 	result := 1
 	for count > 0 {
