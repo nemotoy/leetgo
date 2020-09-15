@@ -37,8 +37,10 @@ func titleToNumber(s string) int {
 	return result
 }
 
-const alphabetLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const lettersLen = len(alphabetLetter)
+const (
+	alphabetLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	lettersLen     = len(alphabetLetter)
+)
 
 // nの乗数（count）を返す
 func multiplier(n, count int) int {
