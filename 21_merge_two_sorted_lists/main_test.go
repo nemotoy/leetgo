@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"testing"
 )
 
@@ -62,5 +63,31 @@ func TestMergeTwoLists(t *testing.T) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
 		})
+	}
+}
+
+const listSurfix = "->"
+
+// 1->2->3 のような文字列を返す
+func chainedLists(l *ListNode, s string) string {
+	v := strconv.Itoa(l.Val)
+	if l.Next == nil {
+		return s + v
+	}
+	return chainedLists(l.Next, s+v+listSurfix)
+}
+
+func TestChainedLists(t *testing.T) {
+	in := &ListNode{
+		1, &ListNode{
+			2, &ListNode{
+				3, nil,
+			},
+		},
+	}
+	want := "1->2->3"
+	got := chainedLists(in, "")
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got: %v, want: %v", got, want)
 	}
 }
