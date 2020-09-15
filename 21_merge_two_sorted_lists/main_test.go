@@ -9,10 +9,39 @@ import (
 
 /*
 	## summary
-*/
+	2つの昇順ListNodeをマージして1つの昇順リストにする。要素の重複あり。
 
+	- どのように探索するか
+		- 数字の抽出。マージ。昇順ソート。ListNode生成。
+		- 両listの1つ目を比較して、小さい方を付ける。以降繰り返す。
+	- Goでどう書くか
+*/
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	return nil
+
+	result := &ListNode{}
+	tmp := result
+	for l1 != nil || l2 != nil {
+		if l1 == nil {
+			tmp.Next = l2
+			l2 = nil
+			continue
+		}
+		if l2 == nil {
+			tmp.Next = l1
+			l1 = nil
+			continue
+		}
+		if l1.Val < l2.Val {
+			tmp.Next = l1
+			tmp = tmp.Next
+			l1 = l1.Next
+		} else {
+			tmp.Next = l2
+			tmp = tmp.Next
+			l2 = l2.Next
+		}
+	}
+	return result.Next
 }
 
 type ListNode struct {
