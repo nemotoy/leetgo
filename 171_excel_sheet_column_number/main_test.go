@@ -18,24 +18,22 @@ import (
 */
 func titleToNumber(s string) int {
 
-	if len(s) == 1 {
+	len := len(s)
+	if len == 1 {
 		for _, r := range s {
 			return alphabetToNumber(r)
 		}
 	}
-	nums := make([]int, 0, len(s))
-	for _, r := range s {
-		nums = append(nums, alphabetToNumber(r))
-	}
 	result := 0
-	len := len(nums)
-	for i, n := range nums {
+	for i, r := range s {
+		n := alphabetToNumber(r)
 		if i == len-1 {
 			result += n
 			break
 		}
 		result += multiplier(lettersLen, len-(1+i)) * n
 	}
+
 	return result
 }
 
