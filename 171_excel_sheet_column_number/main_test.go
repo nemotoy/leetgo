@@ -16,6 +16,9 @@ import (
 	2桁で、1桁目が A=1, Z=26, 26*1or26, 2桁目は純粋に番号を加算。
 	AA = 27 (1 * 26 +1)
 	ZY = 701 (26 * 26 + 25 )
+	3桁
+	AAA = ( 26 * 26 * 1 ) + ( 26 * 1 ) + 1
+	→ 桁数 - 1 が乗数
 */
 func titleToNumber(s string) int {
 
@@ -24,24 +27,38 @@ func titleToNumber(s string) int {
 			return alphabetToNumber(r)
 		}
 	}
-	nums := make([]int, len(s))
+	nums := make([]int, 0, len(s))
 	for _, r := range s {
 		num := alphabetToNumber(r)
 		nums = append(nums, num)
 	}
 	result := 0
+	len := len(nums)
+	// 1の位以外は、 nの桁数-1乗して加算する。
 	for i, n := range nums {
-		if i+1 == len(nums) {
+		// 1の位
+		if i == len-1 {
 			result += n
 			break
 		}
-		result += n * lettersLen
+		count := len - (1 + i)
+		tmp := multiplier(lettersLen, count)
+		result += tmp * n
 	}
 	return result
 }
 
 const alphabetLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const lettersLen = len(alphabetLetter)
+
+func multiplier(n, count int) int {
+	result := 1
+	for count > 0 {
+		result *= n
+		count--
+	}
+	return result
+}
 
 // アルファベットを数値に変換する（1~26）
 func alphabetToNumber(r rune) int {
@@ -69,6 +86,9 @@ func TestTitleToNumber(t *testing.T) {
 		},
 		{
 			"ZY", 701,
+		},
+		{
+			"AAA", 703,
 		},
 	}
 	for _, tt := range tests {
