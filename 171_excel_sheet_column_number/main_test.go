@@ -42,7 +42,6 @@ func titleToNumber(s string) int {
 const alphabetLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const lettersLen = len(alphabetLetter)
 
-// TODO: 乗数を返す関数であれば、(n,count)=(9,1)なら9を返さないといけない。
 // nの乗数（count）を返す
 func multiplier(n, count int) int {
 	result := 1
