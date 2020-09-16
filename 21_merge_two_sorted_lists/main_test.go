@@ -9,35 +9,29 @@ import (
 
 /*
 	## summary
-	2つの昇順ListNodeをマージして1つの昇順リストにする。要素の重複あり。
-
-	- どのように探索するか
-		- 数字の抽出。マージ。昇順ソート。ListNode生成。
-		- 両listの1つ目を比較して、小さい方を付ける。以降繰り返す。
-	- Goでどう書くか
+	2つの片方向リストをマージして1つの片方向リストにする。各ノードの要素はint型で、それは昇順になる。また、重複は許容する。
 */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	result := &ListNode{}
-	tmp := result
-	for l1 != nil || l2 != nil {
+	// tailの値はListNodeオブジェクトのポインタを持ったresultで、ある時点以降のListNodeとして扱う。
+	for tail := result; l1 != nil || l2 != nil; tail = tail.Next {
+		// 片方がnilになれば、一方のlistNodeを末尾に追加するだけで良いためイテレーションから抜ける。
 		if l1 == nil {
-			tmp.Next = l2
-			l2 = nil
-			continue
+			tail.Next = l2
+			break
 		}
 		if l2 == nil {
-			tmp.Next = l1
-			l1 = nil
-			continue
+			tail.Next = l1
+			break
 		}
 		if l1.Val < l2.Val {
-			tmp.Next = l1
-			tmp = tmp.Next
+			// 末尾に小さい数を持つListNodeを追加する。
+			tail.Next = l1
+			// 追加されたListNodeは、次点に進める。
 			l1 = l1.Next
 		} else {
-			tmp.Next = l2
-			tmp = tmp.Next
+			tail.Next = l2
 			l2 = l2.Next
 		}
 	}
