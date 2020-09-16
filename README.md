@@ -2,6 +2,8 @@
 
 ![ci](https://github.com/nemotoy/leetgo/workflows/ci/badge.svg)
 
+learn [LeetCode](https://leetcode.com/) in Go.
+
 ## Tips
 
 ### 文字列操作
