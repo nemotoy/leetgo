@@ -86,30 +86,33 @@ func TestMergeTwoLists(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(fmt.Sprintf("%s, %s", chainedLists(tt.in1, ""), chainedLists(tt.in2, "")), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%s, %s", listsToStr(tt.in1), listsToStr(tt.in2)), func(t *testing.T) {
 			got := mergeTwoLists(tt.in1, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 				if got != nil && tt.out != nil {
-					t.Logf("details; got: %v, want: %v", chainedLists(got, ""), chainedLists(tt.out, ""))
+					t.Logf("details; got: %v, want: %v", listsToStr(got), listsToStr(tt.out))
 				}
 			}
 		})
 	}
 }
 
-const listSurfix = "->"
-
-// 1->2->3 のような文字列を返す
-func chainedLists(l *ListNode, s string) string {
-	v := strconv.Itoa(l.Val)
-	if l.Next == nil {
-		return s + v
+// ListNodeオブジェクトから文字列（1->2->3）を返す
+func listsToStr(l *ListNode) string {
+	node := "->"
+	s := ""
+	for l != nil {
+		if l.Next == nil {
+			node = ""
+		}
+		s += strconv.Itoa(l.Val) + node
+		l = l.Next
 	}
-	return chainedLists(l.Next, s+v+listSurfix)
+	return s
 }
 
-func TestChainedLists(t *testing.T) {
+func TestListsToStr(t *testing.T) {
 	in := &ListNode{
 		1, &ListNode{
 			2, &ListNode{
@@ -118,7 +121,7 @@ func TestChainedLists(t *testing.T) {
 		},
 	}
 	want := "1->2->3"
-	got := chainedLists(in, "")
+	got := listsToStr(in)
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got: %v, want: %v", got, want)
 	}
