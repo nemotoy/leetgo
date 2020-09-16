@@ -92,15 +92,18 @@ func TestMergeTwoLists(t *testing.T) {
 	}
 }
 
+const nodeLink = "->"
+
 // ListNodeオブジェクトから文字列（1->2->3）を返す
 func listsToStr(l *ListNode) string {
-	node := "->"
 	s := ""
 	for l != nil {
+		v := strconv.Itoa(l.Val)
 		if l.Next == nil {
-			node = ""
+			s += v
+			break
 		}
-		s += strconv.Itoa(l.Val) + node
+		s += v + nodeLink
 		l = l.Next
 	}
 	return s
