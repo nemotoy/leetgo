@@ -4,6 +4,8 @@
 
 learn [LeetCode](https://leetcode.com/) in Go.
 
+- `list` directory manages problems related to the list node.
+
 ## Tips
 
 ### 文字列操作
