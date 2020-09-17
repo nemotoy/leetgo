@@ -2,15 +2,16 @@ package main
 
 import (
 	"reflect"
-	"strconv"
 	"testing"
+
+	l "nemotoy/leetgo/list"
 )
 
 /*
 	## summary
 */
-func reverseList(head *ListNode) *ListNode {
-	r := &ListNode{}
+func reverseList(head *l.ListNode) *l.ListNode {
+	r := &l.ListNode{}
 	for head.Next != nil {
 		r.Next = head
 		head = head.Next
@@ -18,34 +19,39 @@ func reverseList(head *ListNode) *ListNode {
 	return r.Next
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func TestReverseList(t *testing.T) {
 	tests := []struct {
-		in  *ListNode
-		out *ListNode
+		in  *l.ListNode
+		out *l.ListNode
 	}{
 		{
-			&ListNode{
-				1, &ListNode{
-					2, &ListNode{
-						3, &ListNode{
-							4, &ListNode{
-								5, nil,
+			&l.ListNode{
+				Val: 1,
+				Next: &l.ListNode{
+					Val: 2,
+					Next: &l.ListNode{
+						Val: 3,
+						Next: &l.ListNode{
+							Val: 4,
+							Next: &l.ListNode{
+								Val:  5,
+								Next: nil,
 							},
 						},
 					},
 				},
 			},
-			&ListNode{
-				5, &ListNode{
-					4, &ListNode{
-						3, &ListNode{
-							2, &ListNode{
-								1, nil,
+			&l.ListNode{
+				Val: 5,
+				Next: &l.ListNode{
+					Val: 4,
+					Next: &l.ListNode{
+						Val: 3,
+						Next: &l.ListNode{
+							Val: 2,
+							Next: &l.ListNode{
+								Val:  1,
+								Next: nil,
 							},
 						},
 					},
@@ -54,30 +60,14 @@ func TestReverseList(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(listsToStr(tt.in), func(t *testing.T) {
+		t.Run(tt.in.Visualize(), func(t *testing.T) {
 			got := reverseList(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 				if got != nil && tt.out != nil {
-					t.Logf("details; got: %v, want: %v", listsToStr(got), listsToStr(tt.out))
+					t.Logf("details; got: %v, want: %v", got.Visualize(), tt.out.Visualize())
 				}
 			}
 		})
 	}
-}
-
-const nodeLink = "->"
-
-func listsToStr(l *ListNode) string {
-	s := ""
-	for l != nil {
-		v := strconv.Itoa(l.Val)
-		if l.Next == nil {
-			s += v
-			break
-		}
-		s += v + nodeLink
-		l = l.Next
-	}
-	return s
 }
