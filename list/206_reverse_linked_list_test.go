@@ -1,17 +1,15 @@
-package main
+package list
 
 import (
 	"reflect"
 	"testing"
-
-	l "nemotoy/leetgo/list"
 )
 
 /*
 	## summary
 */
-func reverseList(head *l.ListNode) *l.ListNode {
-	r := &l.ListNode{}
+func reverseList(head *ListNode) *ListNode {
+	r := &ListNode{}
 	for head.Next != nil {
 		r.Next = head
 		head = head.Next
@@ -21,37 +19,37 @@ func reverseList(head *l.ListNode) *l.ListNode {
 
 func TestReverseList(t *testing.T) {
 	tests := []struct {
-		in  *l.ListNode
-		out *l.ListNode
+		in  *ListNode
+		out *ListNode
 	}{
 		{
-			&l.ListNode{
-				Val: 1,
-				Next: &l.ListNode{
-					Val: 2,
-					Next: &l.ListNode{
-						Val: 3,
-						Next: &l.ListNode{
-							Val: 4,
-							Next: &l.ListNode{
-								Val:  5,
-								Next: nil,
+			&ListNode{
+				1,
+				&ListNode{
+					2,
+					&ListNode{
+						3,
+						&ListNode{
+							4,
+							&ListNode{
+								5,
+								nil,
 							},
 						},
 					},
 				},
 			},
-			&l.ListNode{
-				Val: 5,
-				Next: &l.ListNode{
-					Val: 4,
-					Next: &l.ListNode{
-						Val: 3,
-						Next: &l.ListNode{
-							Val: 2,
-							Next: &l.ListNode{
-								Val:  1,
-								Next: nil,
+			&ListNode{
+				5,
+				&ListNode{
+					4,
+					&ListNode{
+						3,
+						&ListNode{
+							2,
+							&ListNode{
+								1,
+								nil,
 							},
 						},
 					},
