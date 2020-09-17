@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
+	l "nemotoy/leetgo/list"
 	"reflect"
-	"strconv"
 	"testing"
 )
 
@@ -11,9 +10,9 @@ import (
 	## summary
 	2つの片方向リストをマージして1つの片方向リストにする。各ノードの要素はint型で、それは昇順になる。また、重複は許容する。
 */
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+func mergeTwoLists(l1 *l.ListNode, l2 *l.ListNode) *l.ListNode {
 
-	result := &ListNode{}
+	result := &l.ListNode{}
 	// tailの値はListNodeオブジェクトのポインタを持ったresultで、ある時点以降のListNodeとして扱う。
 	for tail := result; l1 != nil || l2 != nil; tail = tail.Next {
 		// 片方がnilになれば、一方のlistNodeを末尾に追加するだけで良いためイテレーションから抜ける。
@@ -38,39 +37,46 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return result.Next
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func TestMergeTwoLists(t *testing.T) {
 	tests := []struct {
-		in1 *ListNode
-		in2 *ListNode
-		out *ListNode
+		in1 *l.ListNode
+		in2 *l.ListNode
+		out *l.ListNode
 	}{
 		{
-			&ListNode{
-				1, &ListNode{
-					2, &ListNode{
-						4, nil,
+			&l.ListNode{
+				Val: 1,
+				Next: &l.ListNode{
+					Val: 2,
+					Next: &l.ListNode{
+						Val:  4,
+						Next: nil,
 					},
 				},
 			},
-			&ListNode{
-				1, &ListNode{
-					3, &ListNode{
-						4, nil,
+			&l.ListNode{
+				Val: 1,
+				Next: &l.ListNode{
+					Val: 3,
+					Next: &l.ListNode{
+						Val:  4,
+						Next: nil,
 					},
 				},
 			},
-			&ListNode{
-				1, &ListNode{
-					1, &ListNode{
-						2, &ListNode{
-							3, &ListNode{
-								4, &ListNode{
-									4, nil,
+			&l.ListNode{
+				Val: 1,
+				Next: &l.ListNode{
+					Val: 1,
+					Next: &l.ListNode{
+						Val: 2,
+						Next: &l.ListNode{
+							Val: 3,
+							Next: &l.ListNode{
+								Val: 4,
+								Next: &l.ListNode{
+									Val:  4,
+									Next: nil,
 								},
 							},
 						},
@@ -80,46 +86,14 @@ func TestMergeTwoLists(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(fmt.Sprintf("%s, %s", listsToStr(tt.in1), listsToStr(tt.in2)), func(t *testing.T) {
+		t.Run(tt.in1.Visualize()+tt.in2.Visualize(), func(t *testing.T) {
 			got := mergeTwoLists(tt.in1, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 				if got != nil && tt.out != nil {
-					t.Logf("details; got: %v, want: %v", listsToStr(got), listsToStr(tt.out))
+					t.Logf("details; got: %s, want: %s", got.Visualize(), tt.out.Visualize())
 				}
 			}
 		})
-	}
-}
-
-const nodeLink = "->"
-
-// ListNodeオブジェクトから文字列（1->2->3）を返す
-func listsToStr(l *ListNode) string {
-	s := ""
-	for l != nil {
-		v := strconv.Itoa(l.Val)
-		if l.Next == nil {
-			s += v
-			break
-		}
-		s += v + nodeLink
-		l = l.Next
-	}
-	return s
-}
-
-func TestListsToStr(t *testing.T) {
-	in := &ListNode{
-		1, &ListNode{
-			2, &ListNode{
-				3, nil,
-			},
-		},
-	}
-	want := "1->2->3"
-	got := listsToStr(in)
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got: %v, want: %v", got, want)
 	}
 }
