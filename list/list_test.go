@@ -6,16 +6,29 @@ import (
 )
 
 func TestListNode_Visualize(t *testing.T) {
-	in := &ListNode{
-		1, &ListNode{
-			2, &ListNode{
-				3, nil,
+	tests := []struct {
+		in  *ListNode
+		out string
+	}{
+		{
+			&ListNode{
+				1, &ListNode{
+					2, &ListNode{
+						3, nil,
+					},
+				},
 			},
+			"1->2->3",
+		},
+		{
+			nil,
+			"",
 		},
 	}
-	want := "1->2->3"
-	got := in.Visualize()
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got: %v, want: %v", got, want)
+	for _, tt := range tests {
+		got := tt.in.Visualize()
+		if !reflect.DeepEqual(got, tt.out) {
+			t.Errorf("got: %s, want: %s", got, tt.out)
+		}
 	}
 }
