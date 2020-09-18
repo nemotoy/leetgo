@@ -61,9 +61,10 @@ func TestReverseList(t *testing.T) {
 		t.Run(tt.in.Visualize(), func(t *testing.T) {
 			got := reverseList(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
-				t.Errorf("got: %v, want: %v", got, tt.out)
 				if got != nil && tt.out != nil {
-					t.Logf("details; got: %v, want: %v", got.Visualize(), tt.out.Visualize())
+					t.Errorf("details; got: %s, want: %s", got.Visualize(), tt.out.Visualize())
+				} else {
+					t.Errorf("got: %v, want: %v", got, tt.out)
 				}
 			}
 		})
