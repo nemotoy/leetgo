@@ -9,12 +9,13 @@ import (
 	## summary
 */
 func reverseList(head *ListNode) *ListNode {
-	r := &ListNode{}
-	for head.Next != nil {
-		r.Next = head
-		head = head.Next
+	if head == nil || head.Next == nil {
+		return head
 	}
-	return r.Next
+	p := reverseList(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return p
 }
 
 func TestReverseList(t *testing.T) {
