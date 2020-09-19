@@ -8,9 +8,21 @@ import (
 
 /*
 	## summary
+	k >= 0, 配列の右からk分左に移動する。
+	配列のインデックスをずらすことができれば、メモリアロケートしなくて済む。
+	例）
+	array = [1,2,3,4], k = 2 の期待値は [3,4,1,2]なので、配列の前からk-1番目まではインデックスが +k され、配列後からk番目まではインデックスが -k される。
+	- l-k > k 場合は通らない。
 */
 func rotate(nums []int, k int) {
-
+	l := len(nums)
+	l2 := l - k
+	i := 0
+	for l > l2 {
+		nums[i], nums[l2] = nums[l2], nums[i]
+		l2++
+		i++
+	}
 }
 
 func TestRotate(t *testing.T) {
@@ -19,6 +31,11 @@ func TestRotate(t *testing.T) {
 		in2 int
 		out []int
 	}{
+		{
+			[]int{1, 2, 3, 4},
+			2,
+			[]int{3, 4, 1, 2},
+		},
 		{
 			[]int{1, 2, 3, 4, 5, 6, 7},
 			3,
