@@ -13,15 +13,17 @@ import (
 	例）
 	array = [1,2,3,4], k = 2 の期待値は [3,4,1,2]なので、配列の前からk-1番目まではインデックスが +k され、配列後からk番目まではインデックスが -k される。
 	- l-k > k 場合は通らない。
+	1. l < kまで、最後尾の要素を先頭のインデックスに変更する。
 */
 func rotate(nums []int, k int) {
 	l := len(nums)
-	l2 := l - k
-	i := 0
-	for l > l2 {
-		nums[i], nums[l2] = nums[l2], nums[i]
-		l2++
-		i++
+	if l == 0 {
+		return
+	}
+	for i := 0; i < k; i++ {
+		for j := l - 1; j > 0; j-- {
+			nums[j], nums[j-1] = nums[j-1], nums[j] // 最後尾の要素を先頭のインデックスに変更する。
+		}
 	}
 }
 
