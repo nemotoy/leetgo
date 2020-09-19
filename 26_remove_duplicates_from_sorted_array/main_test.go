@@ -7,9 +7,21 @@ import (
 
 /*
 	## summary
+	配列の要素はソート済み。
+	0番目をi, 1番目をjとし、各要素が同値でなければiをインクリメントし、j番目の要素をi番目に要素に入れる。
 */
 func removeDuplicates(nums []int) int {
-	return 0
+	if len(nums) == 0 {
+		return 0
+	}
+	i := 0
+	for j := 1; j < len(nums); j++ {
+		if nums[j] != nums[i] {
+			i++
+			nums[i] = nums[j]
+		}
+	}
+	return i + 1
 }
 
 func Test_removeDuplicates(t *testing.T) {
