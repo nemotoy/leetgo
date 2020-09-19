@@ -21,7 +21,7 @@ func removeDuplicates(nums []int) int {
 			nums[i] = nums[j]
 		}
 	}
-	return i + 1
+	return i + 1 // iは0番目を基底値としているため、+1を加算する
 }
 
 func Test_removeDuplicates(t *testing.T) {
