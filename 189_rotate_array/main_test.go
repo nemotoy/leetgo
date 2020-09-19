@@ -17,7 +17,7 @@ import (
 */
 func rotate(nums []int, k int) {
 	l := len(nums)
-	if l == 0 {
+	if l <= 1 {
 		return
 	}
 	for i := 0; i < k; i++ {
