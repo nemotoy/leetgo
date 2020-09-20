@@ -9,28 +9,24 @@ import (
 /*
 	## summary
 	階段の上階に登る。一度に1か2階段登れる。取り得る選択肢を返す。
-	- 全て1の場合
-	- 2が含まれる場合
-		- 個数は要素の長さ（※正しくない）
-	- 全て2の場合
 */
 func climbStairs(n int) int {
-	if n == 1 {
+	m := make([]int, n)
+	return calc(n, 0, m)
+}
+
+func calc(n, i int, m []int) int {
+	if i > n {
+		return 0
+	}
+	if i == n {
 		return 1
 	}
-	r := 0
-	r += 1 // 全て1の場合
-	// 全て2の場合
-	if n%2 == 0 {
-		r += 1
+	if m[i] > 0 {
+		return m[i]
 	}
-	// 2が含まれる場合
-	// iは2の個数
-	for i := 1; n-(2*i) > 0; i++ {
-		l := n - i // 要素数（ 組み合わせ要素nのi個)
-		r += l     // 要素数を加算
-	}
-	return r
+	m[i] = calc(n, i+1, m) + calc(n, i+2, m)
+	return m[i]
 }
 
 func TestClimbStairs(t *testing.T) {
