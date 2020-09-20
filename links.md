@@ -15,6 +15,8 @@
 
 ## Dynamic Programming
 
+- [70. Climbing Stairs](70_climbing_stairs/main_test.go)
+
 ## Design
 
 ## Math
