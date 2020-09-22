@@ -10,21 +10,24 @@ import (
 	## summary
 	nums.Length == 2n
 
-	配列をn以前・以降の2つに分けて、インデックスが交互になるようにする。
+	1. 配列をn以前・以降の2つに分け、新規配列に交互に要素を追加する。
+	要素順はx,yの順番なので、2で割り切れるか否かで評価できる。
 */
 func shuffle(nums []int, n int) []int {
 	if n == 1 {
 		return nums
 	}
 	xv, yv := nums[:n], nums[n:]
-	fmt.Println(xv, yv)
 	result := make([]int, len(nums))
+	x, y := 0, 0 // x,y配列のインデックス
 	for i := 0; i < len(nums); i++ {
 		switch {
 		case i%2 == 0:
-			result[i] = xv[i]
+			result[i] = xv[x]
+			x++
 		default:
-			result[i] = yv[i]
+			result[i] = yv[y]
+			y++
 		}
 	}
 	return result
