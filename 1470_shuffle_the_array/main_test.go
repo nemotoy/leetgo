@@ -8,9 +8,26 @@ import (
 
 /*
 	## summary
+	nums.Length == 2n
+
+	配列をn以前・以降の2つに分けて、インデックスが交互になるようにする。
 */
 func shuffle(nums []int, n int) []int {
-	return []int{}
+	if n == 1 {
+		return nums
+	}
+	xv, yv := nums[:n], nums[n:]
+	fmt.Println(xv, yv)
+	result := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		switch {
+		case i%2 == 0:
+			result[i] = xv[i]
+		default:
+			result[i] = yv[i]
+		}
+	}
+	return result
 }
 
 func TestShuffle(t *testing.T) {
