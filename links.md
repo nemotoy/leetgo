@@ -13,6 +13,8 @@
 
 ## Sorting and Searching
 
+- [278. First Bad Version](278_first_bad_version/main_test.go)
+
 ## Dynamic Programming
 
 - [70. Climbing Stairs](70_climbing_stairs/main_test.go)
