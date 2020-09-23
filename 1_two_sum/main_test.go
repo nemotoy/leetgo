@@ -13,11 +13,10 @@ import (
 	Sol1. 基底値をi,次基底値をj(i+1)とし、i+j(jはlen(nums)まで検索) = targetを順次比較する。
 */
 func twoSum(nums []int, target int) []int {
-	l := len(nums)
-	for i := 0; i+1 < l; i++ {
-		for j := i + 1; j < l; j++ {
-			if target == nums[i]+nums[j] {
-				return []int{i, j}
+	for i, n1 := range nums {
+		for j, n2 := range nums[i+1:] {
+			if target == n1+n2 {
+				return []int{i, j + i + 1}
 			}
 		}
 	}
