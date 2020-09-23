@@ -8,6 +8,9 @@ import (
 
 /*
 	## summary
+	numsの要素を2つ加算し、targetになるインデックス群を返す。
+
+	Sol1. 基底値をi,次基底値をj(i+1)とし、i+j(jはlen(nums)まで検索) = targetを順次比較する。
 */
 func twoSum(nums []int, target int) []int {
 	l := len(nums)
