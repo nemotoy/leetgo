@@ -28,10 +28,12 @@ func twoSum(nums []int, target int) []int {
 
 func twoSumWithHashTable(nums []int, target int) []int {
 	m := make(map[int]int, len(nums))
+	// k: element, v: index
 	for i := 0; i < len(nums); i++ {
 		m[nums[i]] = i
 	}
 	for i := 0; i < len(nums); i++ {
+		// target - nums[i]が取得したい要素値
 		complement := target - nums[i]
 		if v, ok := m[complement]; ok {
 			if v != i {
