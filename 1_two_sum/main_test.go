@@ -10,9 +10,12 @@ import (
 	## summary
 */
 func twoSum(nums []int, target int) []int {
-	for i := 0; i < len(nums); i++ {
-		if target == nums[i]+nums[i+1] {
-			return []int{i, i + 1}
+	l := len(nums)
+	for i := 0; i+1 < l; i++ {
+		for j := 1; j < l; j++ {
+			if target == nums[i]+nums[j] {
+				return []int{i, j}
+			}
 		}
 	}
 	return []int{}
@@ -38,6 +41,11 @@ func Test(t *testing.T) {
 			[]int{3, 3},
 			6,
 			[]int{0, 1},
+		},
+		{
+			[]int{3, 2, 3},
+			6,
+			[]int{0, 2},
 		},
 	}
 	for _, tt := range tests {
