@@ -44,7 +44,19 @@ func twoSumWithHashTable(nums []int, target int) []int {
 	return []int{}
 }
 
-func Test(t *testing.T) {
+func twoSumWithHashTable2(nums []int, target int) []int {
+	m := make(map[int]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		complement := target - nums[i]
+		if v, ok := m[complement]; ok {
+			return []int{v, i}
+		}
+		m[nums[i]] = i
+	}
+	return []int{}
+}
+
+func TestTwoSum(t *testing.T) {
 	tests := []struct {
 		in  []int
 		in2 int
@@ -78,7 +90,7 @@ func Test(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("nums:%v target:%d", tt.in, tt.in2), func(t *testing.T) {
-			got := twoSumWithHashTable(tt.in, tt.in2)
+			got := twoSumWithHashTable2(tt.in, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
