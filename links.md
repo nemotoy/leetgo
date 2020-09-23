@@ -4,6 +4,7 @@
 
 - [26. Remove Duplicates from Sorted Array](26_remove_duplicates_from_sorted_array/main_test.go)
 - [189. Rotate Array](189_rotate_array/main_test.go)
+- [1. Two Sum](1_two_sum/main_test.go)
 
 ## Strings
 
