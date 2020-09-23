@@ -10,6 +10,11 @@ import (
 	## summary
 */
 func twoSum(nums []int, target int) []int {
+	for i := 0; i < len(nums); i++ {
+		if target == nums[i]+nums[i+1] {
+			return []int{i, i + 1}
+		}
+	}
 	return []int{}
 }
 
