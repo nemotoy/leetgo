@@ -12,19 +12,26 @@ import (
 */
 func countPrimes(n int) int {
 	r := 0
-	for i := 2; i < n; i++ {
-		// 自身は評価しない。基底値-1 から2以上の間で割れるか。
-		r++
-		v := i - 1
-		for v >= 2 {
-			if i%v == 0 {
-				r--
-				break
-			}
-			v--
+	for i := 1; i < n; i++ {
+		if isPrime(i) {
+			r++
 		}
 	}
+	// 自身は評価しない。基底値-1 から2以上の間で割れるか。
+
 	return r
+}
+
+func isPrime(n int) bool {
+	if n <= 1 {
+		return false
+	}
+	for i := 2; i < n; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
 }
 
 func TestCountPrimes(t *testing.T) {
