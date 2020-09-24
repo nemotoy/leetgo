@@ -24,4 +24,6 @@
 
 ## Math
 
+- [204. Count Primes](204_count_primes/main_test.go)
+
 ## Others
