@@ -8,9 +8,23 @@ import (
 
 /*
 	## summary
+	素数評価 正の約数が1と自身
 */
 func countPrimes(n int) int {
-	return 0
+	r := 0
+	for i := 2; i < n; i++ {
+		// 自身は評価しない。基底値-1 から2以上の間で割れるか。
+		r++
+		v := i - 1
+		for v >= 2 {
+			if i%v == 0 {
+				r--
+				break
+			}
+			v--
+		}
+	}
+	return r
 }
 
 func TestCountPrimes(t *testing.T) {
@@ -20,6 +34,9 @@ func TestCountPrimes(t *testing.T) {
 	}{
 		{
 			10, 4,
+		},
+		{
+			2, 0,
 		},
 	}
 	for _, tt := range tests {
