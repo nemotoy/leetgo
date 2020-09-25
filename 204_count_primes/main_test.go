@@ -44,32 +44,29 @@ func isPrime(n int) bool {
 */
 func countPrimesWithSoE(n int) int {
 
-	if n == 2 {
+	if n <= 2 {
 		return 0
 	}
 
-	searchList := make([]int, n-1)
-	for i := 0; i+2 <= n; i++ {
+	searchList := make([]int, n-2)
+	for i := 0; i+2 < n; i++ {
 		searchList[i] = i + 2
 	}
-	sqrt := math.Sqrt(float64(n))
-	fmt.Println("suquare root: ", sqrt)
-
 	fmt.Println(searchList)
+	sqrt := math.Sqrt(float64(n))
+	fmt.Println(sqrt)
 	primeList := []int{}
 	for len(searchList) > 0 {
-		fn := searchList[0]
-		if float64(fn) > sqrt {
-			fmt.Println("to sqrt")
-			primeList = append(primeList, searchList...)
+		fn := searchList[0]               // 先頭要素取得
+		primeList = append(primeList, fn) // 素数リストに追加
+		fmt.Println(primeList)
+		if float64(fn) > sqrt { // nの平方根との比較
+			fmt.Println(searchList[1:])
+			primeList = append(primeList, searchList[1:]...) // 上で追加した以外の探索リストを素数リストに追加
 			break
 		}
-		primeList = append(primeList, fn) //TODO
-		fmt.Println("Prev:", searchList)
-		searchList = remove(searchList, fn)
-		fmt.Println("follow:", searchList)
+		searchList = remove(searchList, fn) // 探索リストから渡した要素の倍数を削除する
 	}
-	fmt.Println("Result:", primeList)
 	return len(primeList)
 }
 
@@ -77,9 +74,8 @@ func countPrimesWithSoE(n int) int {
 // TODO: 新規メモリ割り当ては避けたい。
 func remove(nums []int, n int) []int {
 	r := []int{}
-	for i, v := range nums {
+	for _, v := range nums {
 		if v%n != 0 {
-			fmt.Println(i, v, n)
 			r = append(r, v)
 		}
 	}
@@ -99,6 +95,9 @@ func TestCountPrimes(t *testing.T) {
 		},
 		{
 			4, 2,
+		},
+		{
+			3, 1,
 		},
 	}
 	for _, tt := range tests {
