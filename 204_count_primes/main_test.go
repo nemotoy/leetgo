@@ -44,11 +44,16 @@ func isPrime(n int) bool {
 */
 func countPrimesWithSoE(n int) int {
 
+	if n == 2 {
+		return 0
+	}
+
 	searchList := make([]int, n-1)
 	for i := 0; i+2 <= n; i++ {
 		searchList[i] = i + 2
 	}
 	sqrt := math.Sqrt(float64(n))
+	fmt.Println("suquare root: ", sqrt)
 
 	fmt.Println(searchList)
 	primeList := []int{}
@@ -56,18 +61,29 @@ func countPrimesWithSoE(n int) int {
 		fn := searchList[0]
 		if float64(fn) > sqrt {
 			fmt.Println("to sqrt")
+			primeList = append(primeList, searchList...)
 			break
 		}
-		primeList = append(primeList, fn) //todo
-		for i, s := range searchList {
-			if s%fn == 0 {
-				fmt.Println(s, fn)
-				searchList = append(searchList[:i], searchList[i+1:]...)
-				fmt.Println(searchList)
-			}
+		primeList = append(primeList, fn) //TODO
+		fmt.Println("Prev:", searchList)
+		searchList = remove(searchList, fn)
+		fmt.Println("follow:", searchList)
+	}
+	fmt.Println("Result:", primeList)
+	return len(primeList)
+}
+
+// nで割り切れなかった数字を返す。
+// TODO: 新規メモリ割り当ては避けたい。
+func remove(nums []int, n int) []int {
+	r := []int{}
+	for i, v := range nums {
+		if v%n != 0 {
+			fmt.Println(i, v, n)
+			r = append(r, v)
 		}
 	}
-	return len(primeList)
+	return r
 }
 
 func TestCountPrimes(t *testing.T) {
@@ -76,7 +92,7 @@ func TestCountPrimes(t *testing.T) {
 		out int
 	}{
 		{
-			10, 4,
+			10, 4, // 3,5,7,9 = 4
 		},
 		{
 			2, 0,
