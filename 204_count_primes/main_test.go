@@ -52,16 +52,12 @@ func countPrimesWithSoE(n int) int {
 	for i := 0; i+2 < n; i++ {
 		searchList[i] = i + 2
 	}
-	fmt.Println(searchList)
 	sqrt := math.Sqrt(float64(n))
-	fmt.Println(sqrt)
 	primeList := []int{}
 	for len(searchList) > 0 {
 		fn := searchList[0]               // 先頭要素取得
 		primeList = append(primeList, fn) // 素数リストに追加
-		fmt.Println(primeList)
-		if float64(fn) > sqrt { // nの平方根との比較
-			fmt.Println(searchList[1:])
+		if float64(fn) > sqrt {           // nの平方根との比較
 			primeList = append(primeList, searchList[1:]...) // 上で追加した以外の探索リストを素数リストに追加
 			break
 		}
