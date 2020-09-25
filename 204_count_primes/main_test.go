@@ -42,7 +42,7 @@ func isPrime(n int) bool {
 	3. 2の操作を、探索リストの先頭値がxの平方根に達するまで行う
 	4. 探索リストに残った数を素数リストに移動して処理終了
 */
-func countPrimes(n int) int {
+func countPrimesSoE(n int) int {
 
 	if n <= 2 {
 		return 0
@@ -74,6 +74,30 @@ func remove(nums []int, n int) []int {
 		}
 	}
 	return r
+}
+
+func countPrimes(n int) int {
+	primeList := make([]bool, n)
+	for i := 2; i < n; i++ {
+		primeList[i] = true
+	}
+
+	// iで割り切れれば、i*iもiで割り切れる。
+	for i := 2; i*i < n; i++ {
+		if !primeList[i] {
+			continue
+		}
+		for j := i * i; j < n; j += i {
+			primeList[j] = false
+		}
+	}
+	count := 0
+	for i := 2; i < n; i++ {
+		if primeList[i] {
+			count++
+		}
+	}
+	return count
 }
 
 func TestCountPrimes(t *testing.T) {
