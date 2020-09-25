@@ -55,19 +55,17 @@ func countPrimes(n int) int {
 	sqrt := math.Sqrt(float64(n))
 	primeList := []int{}
 	for len(searchList) > 0 {
-		fn := searchList[0]               // 先頭要素取得
-		primeList = append(primeList, fn) // 素数リストに追加
-		if float64(fn) > sqrt {           // nの平方根との比較
-			primeList = append(primeList, searchList[1:]...) // 上で追加した以外の探索リストを素数リストに追加
+		fn := searchList[0]
+		primeList = append(primeList, fn)
+		if float64(fn) > sqrt {
+			primeList = append(primeList, searchList[1:]...)
 			break
 		}
-		searchList = remove(searchList, fn) // 探索リストから渡した要素の倍数を削除する
+		searchList = remove(searchList, fn)
 	}
 	return len(primeList)
 }
 
-// nで割り切れなかった数字を返す。
-// TODO: 新規メモリ割り当ては避けたい。
 func remove(nums []int, n int) []int {
 	r := []int{}
 	for _, v := range nums {
