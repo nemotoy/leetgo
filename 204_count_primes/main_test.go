@@ -11,7 +11,7 @@ import (
 	## summary
 	素数評価 正の約数が1と自身
 */
-func countPrimes(n int) int {
+func countPrimes_old(n int) int {
 	r := 0
 	for i := 1; i < n; i++ {
 		if isPrime(i) {
@@ -42,7 +42,7 @@ func isPrime(n int) bool {
 	3. 2の操作を、探索リストの先頭値がxの平方根に達するまで行う
 	4. 探索リストに残った数を素数リストに移動して処理終了
 */
-func countPrimesWithSoE(n int) int {
+func countPrimes(n int) int {
 
 	if n <= 2 {
 		return 0
@@ -98,7 +98,7 @@ func TestCountPrimes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d", tt.in), func(t *testing.T) {
-			got := countPrimesWithSoE(tt.in)
+			got := countPrimes(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
