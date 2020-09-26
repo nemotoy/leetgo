@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"reflect"
 	"testing"
 )
@@ -10,7 +11,21 @@ import (
 	## summary
 */
 func reverse(x int) int {
-	return 0
+	const MaxInt = int(math.MaxUint32 >> 1)
+	const MinInt = -MaxInt - 1
+	rev := 0
+	for x != 0 {
+		pop := x % 10
+		x /= 10
+		if rev > MaxInt/10 || rev == MaxInt/10 && pop > 7 {
+			return 0
+		}
+		if rev < MinInt/10 || rev == MinInt/10 && pop < -8 {
+			return 0
+		}
+		rev = rev*10 + pop
+	}
+	return rev
 }
 
 func TestReverse(t *testing.T) {
@@ -26,6 +41,9 @@ func TestReverse(t *testing.T) {
 		},
 		{
 			120, 21,
+		},
+		{
+			-2147483412, -2143847412,
 		},
 	}
 	for _, tt := range tests {
