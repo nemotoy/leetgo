@@ -8,6 +8,8 @@
 
 ## Strings
 
+- [7. Reverse Integer](7_reverse_integer/main_test.go)
+
 ## Linked List
 
 ## Trees
