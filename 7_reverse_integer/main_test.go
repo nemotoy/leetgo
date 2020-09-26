@@ -11,16 +11,14 @@ import (
 	## summary
 */
 func reverse(x int) int {
-	const MaxInt = int(math.MaxUint32 >> 1)
-	const MinInt = -MaxInt - 1
 	rev := 0
 	for x != 0 {
 		pop := x % 10
 		x /= 10
-		if rev > MaxInt/10 || rev == MaxInt/10 && pop > 7 {
+		if rev > math.MaxInt32/10 || rev == math.MaxInt32/10 && pop > 7 {
 			return 0
 		}
-		if rev < MinInt/10 || rev == MinInt/10 && pop < -8 {
+		if rev < math.MinInt32/10 || rev == math.MinInt32/10 && pop < -8 {
 			return 0
 		}
 		rev = rev*10 + pop
