@@ -9,7 +9,28 @@ import (
 	## summary
 */
 func isValid(s string) bool {
-	return false
+	stack := []string{}
+	maps := map[string]string{
+		")": "(",
+		"}": "{",
+		"]": "[",
+	}
+	for _, r := range s {
+		if v, ok := maps[string(r)]; ok {
+			top := "#"
+			if len(stack) != 0 {
+				tail := len(stack) - 1
+				top = stack[tail]
+				stack = stack[:tail]
+			}
+			if v != top {
+				return false
+			}
+		} else {
+			stack = append(stack, string(r))
+		}
+	}
+	return len(stack) == 0
 }
 
 func TestIsValid(t *testing.T) {
