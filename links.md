@@ -29,3 +29,5 @@
 - [204. Count Primes](204_count_primes/main_test.go)
 
 ## Others
+
+- [20. Valid Parentheses](20_valid_parentheses/main_test.go)
