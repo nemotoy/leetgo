@@ -7,6 +7,8 @@ import (
 
 /*
 	## summary
+	ブラケットはその順にマッチする。{[ の順なら、 ]}の順になることを利用する。
+	前方の文字列はスタックに追加し、後方の文字列はスタックの要素と評価する。
 */
 func isValid(s string) bool {
 	stack := []string{}
