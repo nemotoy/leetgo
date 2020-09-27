@@ -8,20 +8,10 @@ import (
 
 /*
 	## summary
+	needleが存在するindexを返す。
 */
 func strStr(haystack string, needle string) int {
-	result := 0
-	for _, r := range needle {
-		n := strings.Count(haystack, string(r))
-		if n <= 0 {
-			result = -1
-			break
-		}
-		if result < n {
-			result = n
-		}
-	}
-	return result
+	return strings.Index(haystack, needle)
 }
 
 func Test(t *testing.T) {
@@ -35,6 +25,9 @@ func Test(t *testing.T) {
 		},
 		{
 			"aaaaa", "bba", -1,
+		},
+		{
+			"a", "a", 0,
 		},
 	}
 	for _, tt := range tests {
