@@ -47,8 +47,12 @@ for i := 0; i < size; i++ {
 nums := []int{1, 2, 3, 4, 5}
 i := 2
 nums = append(nums[:i], nums[i+1:]...)
+fmt.Println("expeted: [1 2 4 5], got: ", nums)
 
-fmt.Println("expeted: [1 2 4 5], got: ",nums)
+// スライスから最後の要素を削除する
+nums := []int{1, 2, 3, 4, 5}
+nums = nums[:len(nums)-1]
+fmt.Println("expeted: [1 2 3 4], got: ", nums)
 ```
 
 ## References
