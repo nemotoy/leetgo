@@ -10,8 +10,12 @@ import (
 	先頭要素を基底にして、他配列要素を走査する。
 */
 func longestCommonPrefix(strs []string) string {
-	if len(strs) == 0 {
+	l := len(strs)
+	if l == 0 {
 		return ""
+	}
+	if l == 1 {
+		return strs[0]
 	}
 	base := strs[0]
 	for i := 1; i < len(base); i++ {
@@ -41,6 +45,10 @@ func TestLongestCommonPrefix(t *testing.T) {
 		{
 			[]string{"dog", "racecar", "car"},
 			"",
+		},
+		{
+			[]string{"a"},
+			"a",
 		},
 	}
 	for _, tt := range tests {
