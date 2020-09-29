@@ -18,17 +18,17 @@ func generate(numRows int) [][]int {
 	for i := 1; i < numRows; i++ {
 		// 1つ前の要素を取得する
 		prev := result[i-1]
-		// 隣り合う要素を加算し、1要素として追加する。長さは1つ前の要素より1大きい。
-		mid := make([]int, 0, len(prev)+1)
+		// 隣り合う要素を加算し、1要素として追加する。容量は1つ前の要素より1大きいと確定しているので予め決定する。
+		mid := make([]int, len(prev)+1)
 		for pi := 0; pi <= len(prev); pi++ {
-			// 最初と最後はその要素を追加する。それ以外は前要素と加算した値を追加する。
+			// 最初と最後はその要素を追加する。それ以外は前要素と加算した値を追加する。容量は確定しているので、appendは使わない。
 			switch pi {
 			case 0:
-				mid = append(mid, prev[pi])
+				mid[pi] = prev[pi]
 			case len(prev):
-				mid = append(mid, prev[pi-1]) // piの基底値が0なので、pi-1が最終要素。
+				mid[pi] = prev[pi-1]
 			default:
-				mid = append(mid, prev[pi]+prev[pi-1])
+				mid[pi] = prev[pi] + prev[pi-1]
 			}
 		}
 		result[i] = mid
