@@ -12,6 +12,7 @@ func isPowerOfThree(n int) bool {
 	if n == 0 {
 		return false
 	}
+	// 3で割り続ける。最終結果が1（3/3=1）か否かで評価する
 	for n%3 == 0 {
 		n /= 3
 	}
