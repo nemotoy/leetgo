@@ -29,6 +29,7 @@
 ## Math
 
 - [204. Count Primes](204_count_primes/main_test.go)
+- [326. Power of Three](326_power_of_three/main_test.go)
 
 ## Others
 
