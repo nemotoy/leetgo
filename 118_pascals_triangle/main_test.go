@@ -10,20 +10,33 @@ import (
 	## summary
 */
 func generate(numRows int) [][]int {
-	result := [][]int{}
+	result := make([][]int, numRows)
 	if numRows == 0 {
 		return result
 	}
-	for i := 1; i <= numRows; i++ {
+	if numRows == 1 {
+		result[0] = []int{1}
+		return result
+	}
+	// numRows >= 2 は確定。
+	result[0] = []int{1}
+	result[1] = []int{1, 1}
+	for i := 2; i < numRows; i++ {
 		// 1つ前の要素を取得する
 		prev := result[i-1]
-		fmt.Println(prev)
 		// 隣り合う要素を加算し、1要素として追加する。
 		mid := []int{}
-		for pi := 0; pi < len(prev); pi++ {
-			mid = append(mid, prev[pi]+prev[pi+1])
+		for pi := 0; pi <= len(prev); pi++ {
+			// 最初と最後はその要素を追加する。それ以外は前要素と加算した値を追加する。
+			switch pi {
+			case 0:
+				mid = append(mid, prev[pi])
+			case len(prev):
+				mid = append(mid, prev[pi-1]) // piの基底値が0なので、pi-1が最終要素。
+			default:
+				mid = append(mid, prev[pi]+prev[pi-1])
+			}
 		}
-		fmt.Println(mid)
 		result[i] = mid
 	}
 	return result
