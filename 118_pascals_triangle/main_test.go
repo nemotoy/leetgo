@@ -8,6 +8,8 @@ import (
 
 /*
 	## summary
+	- 内部の配列数は与えられた数値と同値
+	- 各配列の要素の最初・最後は1で確定。それ以外の要素は自身のindexに該当する要素と1つ前の要素を加算した値を持つ。
 */
 func generate(numRows int) [][]int {
 	if numRows == 0 {
@@ -23,10 +25,8 @@ func generate(numRows int) [][]int {
 		for pi := 0; pi <= len(prev); pi++ {
 			// 最初と最後はその要素を追加する。それ以外は前要素と加算した値を追加する。容量は確定しているので、appendは使わない。
 			switch pi {
-			case 0:
-				mid[pi] = prev[pi]
-			case len(prev):
-				mid[pi] = prev[pi-1]
+			case 0, len(prev):
+				mid[pi] = 1 // 最初と最後は1で確定なので、prevを参照しない。
 			default:
 				mid[pi] = prev[pi] + prev[pi-1]
 			}
