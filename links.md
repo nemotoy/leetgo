@@ -10,6 +10,7 @@
 
 - [7. Reverse Integer](7_reverse_integer/main_test.go)
 - [28. Implement strStr()](28_implement_strstr/main_test.go)
+- [14. Longest Common Prefix](14_longest_common_prefix/main_test.go)
 
 ## Linked List
 
