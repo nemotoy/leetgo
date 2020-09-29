@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"testing"
 )
 
@@ -25,7 +24,8 @@ func longestCommonPrefix(strs []string) string {
 		prefix = base[:i]
 		// 配列の2要素目以降を走査する
 		for _, s := range strs[1:] {
-			if !strings.Contains(s, prefix) {
+			// sの先頭からprefixの長さ分の文字列と比較する
+			if s[:len(prefix)] != prefix {
 				// 前回走査したprefixを返す
 				return base[:i-1]
 			}
@@ -57,6 +57,10 @@ func TestLongestCommonPrefix(t *testing.T) {
 		},
 		{
 			[]string{"a", "b"},
+			"",
+		},
+		{
+			[]string{"c", "acc", "ccc"},
 			"",
 		},
 	}
