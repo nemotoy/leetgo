@@ -9,7 +9,13 @@ import (
 	## summary
 */
 func isPowerOfThree(n int) bool {
-	return false
+	if n == 0 {
+		return false
+	}
+	for n%3 == 0 {
+		n /= 3
+	}
+	return n == 1
 }
 
 func TestIsPowerOfThree(t *testing.T) {
