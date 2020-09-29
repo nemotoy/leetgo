@@ -34,3 +34,4 @@
 ## Others
 
 - [20. Valid Parentheses](20_valid_parentheses/main_test.go)
+- [118. Pascal's Triangle](118_pascals_triangle/main_test.go)
