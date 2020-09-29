@@ -21,6 +21,11 @@ for i, r := range s {
   }
 }
 
+
+// 文字列から先頭n文字を取得する
+s := "Hello, playground"
+pref := s[:5]
+fmt.Println("expeted: Hello, got: ", pref)
 ```
 
 ### 配列操作
