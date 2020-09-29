@@ -10,22 +10,16 @@ import (
 	## summary
 */
 func generate(numRows int) [][]int {
-	result := make([][]int, numRows)
 	if numRows == 0 {
-		return result
+		return [][]int{}
 	}
-	if numRows == 1 {
-		result[0] = []int{1}
-		return result
-	}
-	// numRows >= 2 は確定。
+	result := make([][]int, numRows)
 	result[0] = []int{1}
-	result[1] = []int{1, 1}
-	for i := 2; i < numRows; i++ {
+	for i := 1; i < numRows; i++ {
 		// 1つ前の要素を取得する
 		prev := result[i-1]
-		// 隣り合う要素を加算し、1要素として追加する。
-		mid := []int{}
+		// 隣り合う要素を加算し、1要素として追加する。長さは1つ前の要素より1大きい。
+		mid := make([]int, 0, len(prev)+1)
 		for pi := 0; pi <= len(prev); pi++ {
 			// 最初と最後はその要素を追加する。それ以外は前要素と加算した値を追加する。
 			switch pi {
