@@ -10,7 +10,23 @@ import (
 	## summary
 */
 func generate(numRows int) [][]int {
-	return nil
+	result := [][]int{}
+	if numRows == 0 {
+		return result
+	}
+	for i := 1; i <= numRows; i++ {
+		// 1つ前の要素を取得する
+		prev := result[i-1]
+		fmt.Println(prev)
+		// 隣り合う要素を加算し、1要素として追加する。
+		mid := []int{}
+		for pi := 0; pi < len(prev); pi++ {
+			mid = append(mid, prev[pi]+prev[pi+1])
+		}
+		fmt.Println(mid)
+		result[i] = mid
+	}
+	return result
 }
 
 func TestGenerate(t *testing.T) {
