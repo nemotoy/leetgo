@@ -12,6 +12,7 @@
 - [28. Implement strStr()](28_implement_strstr/main_test.go)
 - [14. Longest Common Prefix](14_longest_common_prefix/main_test.go)
 - [344. Reverse String](344_reverse_string/main_test.go)
+- [387. First Unique Character in a String](387_first_unique_char_in_string/main_test.go)
 
 ## Linked List
 
