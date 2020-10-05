@@ -4,6 +4,7 @@
 
 - [1. Two Sum](1_two_sum/main_test.go)
 - [26. Remove Duplicates from Sorted Array](26_remove_duplicates_from_sorted_array/main_test.go)
+- [122. Best Time to Buy and Sell Stock II](122_best_time_to_buy_and_shell_stock_ii/main_test.go)
 - [189. Rotate Array](189_rotate_array/main_test.go)
 
 ## Strings
