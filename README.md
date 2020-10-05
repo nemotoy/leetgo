@@ -21,11 +21,19 @@ for i, r := range s {
   }
 }
 
-
 // 文字列から先頭n文字を取得する
 s := "Hello, playground"
 pref := s[:5]
 fmt.Println("expeted: Hello, got: ", pref)
+
+// 文字列がどのアルファベットで構成されているかを表現する
+var s = "abc"
+var count [26]int
+
+for _, r := range s {
+    count[r-'a'] += 1
+}
+fmt.Println("expected: [1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], got: ", count)
 ```
 
 ### 配列操作
