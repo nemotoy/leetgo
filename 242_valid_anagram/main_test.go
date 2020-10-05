@@ -14,7 +14,7 @@ import (
 	- 配列をalphebetiacalにソートする
 	- 配列が同値か比較する
 */
-func isAnagram(s string, t string) bool {
+func oldIsAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
@@ -32,6 +32,46 @@ func isAnagram(s string, t string) bool {
 	return reflect.DeepEqual(ss, tt)
 }
 
+func isAnagram(s string, t string) bool {
+	var (
+		count  [26]int
+		count2 [26]int
+	)
+
+	for _, r := range s {
+		count[r-'a'] += 1
+	}
+	for _, r := range t {
+		count2[r-'a'] += 1
+	}
+
+	return reflect.DeepEqual(count, count2)
+}
+
+// func isAnagram(s string, t string) bool {
+// 	var count [26]int
+
+// 	if len(s) > len(t) {
+// 		for _, r := range t {
+// 			count[r-'a'] += 1
+// 		}
+// 		for _, r := range s {
+// 			if count[r-'a'] -= 1; count[r-'a'] == -1 {
+// 				return false
+// 			}
+// 		}
+// 	}
+// 	for _, r := range s {
+// 		count[r-'a'] += 1
+// 	}
+// 	for _, r := range t {
+// 		if count[r-'a'] -= 1; count[r-'a'] == -1 {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }
+
 func Test_fizzBuzz(t *testing.T) {
 	tests := []struct {
 		inS string
@@ -46,6 +86,9 @@ func Test_fizzBuzz(t *testing.T) {
 		},
 		{
 			"", "", true,
+		},
+		{
+			"ab", "a", false,
 		},
 	}
 	for _, tt := range tests {
