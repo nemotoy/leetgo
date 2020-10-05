@@ -13,7 +13,7 @@ import (
 		- 同値がなければindexを保存
 	- 全て見つからなければ-1を返す
 */
-func firstUniqChar(s string) int {
+func oldfirstUniqChar(s string) int {
 
 	size := len(s)
 	// 1文字なら0を返す
@@ -36,6 +36,25 @@ func firstUniqChar(s string) int {
 			return i
 		}
 	}
+	return -1
+}
+
+func firstUniqChar(s string) int {
+
+	var count [26]int // アルファベット数分の長さをもつ配列を定義する
+
+	for _, r := range s {
+		// アルファベットのindexに要素1を加算する。各要素は文字列に含まれるアルファベットの数を示す。0は含まれない、1はユニーク。
+		count[r-'a'] += 1
+	}
+
+	for i, r := range s {
+		// 先頭から要素を検索し、1であるindexを返す。
+		if count[r-'a'] == 1 {
+			return i
+		}
+	}
+
 	return -1
 }
 
