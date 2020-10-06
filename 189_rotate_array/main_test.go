@@ -18,6 +18,8 @@ import (
 	l < kまで、最後尾の要素を先頭のインデックスに変更する。
 
 	2. rotate2
+	新規配列を割り当て、引数の配列の要素にコピーする。
+
 */
 func rotate(nums []int, k int) {
 	l := len(nums)
@@ -39,11 +41,11 @@ func rotate2(nums []int, k int) {
 	// int型のスライスを長さlでmakeで初期化する。その際、スライスの各要素はゼロ値。
 	a := make([]int, l)
 	for i := 0; i < l; i++ {
-		j := (i + k) % l // TODO:
+		j := (i + k) % l
 		a[j] = nums[i]
 	}
 	// 元の配列の要素を入れ替える
-	for k := 0; k < len(a); k++ {
+	for k := 0; k < l; k++ {
 		nums[k] = a[k]
 	}
 }

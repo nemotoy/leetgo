@@ -4,7 +4,12 @@
 
 - [1. Two Sum](1_two_sum/main_test.go)
 - [26. Remove Duplicates from Sorted Array](26_remove_duplicates_from_sorted_array/main_test.go)
+- [122. Best Time to Buy and Sell Stock II](122_best_time_to_buy_and_shell_stock_ii/main_test.go)
+- [136. Single Number](136_single_number/main_test.go)
 - [189. Rotate Array](189_rotate_array/main_test.go)
+- [217. Contains Duplicate](217_contains_duplicate/main_test.go)
+- [283. Move Zeroes](283_move_zeroes/main_test.go)
+- [350. Intersection of Two Arrays II](350_intersection_of_two_arrays_ii/main_test.go)
 
 ## Strings
 

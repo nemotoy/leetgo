@@ -9,14 +9,15 @@ import (
 /*
 	## summary
 	- 1度でも重複したらtrue
+
+	- sorting
+	ソートして、隣り合う要素が同値か評価し続ける。
+	- hash table
+
 */
 func containsDuplicate(nums []int) bool {
-	m := make(map[int]struct{})
-	for i, num := range nums {
-		if i == 0 {
-			m[num] = struct{}{}
-			continue
-		}
+	m := make(map[int]struct{}, len(nums))
+	for _, num := range nums {
 		if _, ok := m[num]; ok {
 			return true
 		}
