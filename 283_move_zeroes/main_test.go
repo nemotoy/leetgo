@@ -8,10 +8,17 @@ import (
 
 /*
 	## summary
+	与えられたint型の配列の"0"を全て接尾に移動する。
+
+	1.
 	- 0の個数をカウントする
 	- 個数分の0を含むリストを作る
 	- 与えられたリストから要素0を削除する
 	- リスト同士を結合する
+
+	2.
+	- 配列の全要素を探索する。要素が0でない場合、配列の要素を入れ替え、基底値に1を加算する。
+	- 要素が0でない総数から配列の長さまで、要素0を追加する。
 */
 func moveZeroes(nums []int) {
 	incList := []int{}
@@ -40,7 +47,29 @@ func moveZeroes(nums []int) {
 	nums = append(nums, zeroList...)
 }
 
-func Test_fizzBuzz(t *testing.T) {
+func moveZeroes2(nums []int) {
+	lastNonZeroFoundAt := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			nums[lastNonZeroFoundAt] = nums[i]
+			lastNonZeroFoundAt++
+		}
+	}
+	for i := lastNonZeroFoundAt; i < len(nums); i++ {
+		nums[i] = 0
+	}
+}
+
+func moveZeroes3(nums []int) {
+	for lastNonZeroFoundAt, cur := 0, 0; cur < len(nums); cur++ {
+		if nums[cur] != 0 {
+			nums[lastNonZeroFoundAt], nums[cur] = nums[cur], nums[lastNonZeroFoundAt]
+			lastNonZeroFoundAt++
+		}
+	}
+}
+
+func TestMoveZeroes(t *testing.T) {
 	tests := []struct {
 		in  []int
 		out []int
@@ -72,7 +101,7 @@ func Test_fizzBuzz(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			moveZeroes(tt.in)
+			moveZeroes2(tt.in)
 			got := tt.in
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
