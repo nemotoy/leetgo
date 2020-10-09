@@ -22,6 +22,9 @@
 
 ## Linked List
 
+- [21. Merge Two Sorted Lists](list/21_merge_two_sorted_lists_test.go)
+- [206. Reverse Linked List](list/206_reverse_linked_list_test.go)
+
 ## Trees
 
 ## Sorting and Searching
