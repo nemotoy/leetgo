@@ -18,13 +18,11 @@ func isPalindrome(head *ListNode) bool {
 		nums = append(nums, head.Val)
 		head = head.Next
 	}
-	i, j := 0, len(nums)-1
-	for i <= j {
+
+	for i, j := 0, len(nums)-1; i <= j; i, j = i+1, j-1 {
 		if nums[i] != nums[j] {
 			return false
 		}
-		i++
-		j--
 	}
 	return true
 }
