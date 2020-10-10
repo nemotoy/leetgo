@@ -6,9 +6,27 @@ import (
 
 /*
 	## summary
+	struct型の場合、string型と違い長さがわからない（接尾から探索できない。）
+
+	- Nextがnilになるまで探索して、要素をメモリに保存する（int型のスライス）
+	- スライスを操作する
 */
 func isPalindrome(head *ListNode) bool {
-	return false
+	nums := []int{}
+
+	for head != nil {
+		nums = append(nums, head.Val)
+		head = head.Next
+	}
+	i, j := 0, len(nums)-1
+	for i <= j {
+		if nums[i] != nums[j] {
+			return false
+		}
+		i++
+		j--
+	}
+	return true
 }
 
 func TestIsPalindrome(t *testing.T) {
