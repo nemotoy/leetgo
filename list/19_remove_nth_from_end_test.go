@@ -9,9 +9,27 @@ import (
 /*
 	## summary
 	連結リストの先頭からn要素目を削除する。
+	連結リストの要素数をLとすると、削除する要素は L - n+1 となる。ここでのLはリストの次要素がnilである場合を終端とするまでの長さ。
 */
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	return nil
+
+	dummy := &ListNode{}
+	dummy.Next = head
+	l := 0
+	first := head
+
+	for first != nil {
+		l++
+		first = first.Next
+	}
+	l -= n
+	first = dummy
+	for l > 0 {
+		l--
+		first = first.Next
+	}
+	first.Next = first.Next.Next
+	return dummy.Next
 }
 
 func TestRemoveNthFromEnd(t *testing.T) {
@@ -48,7 +66,7 @@ func TestRemoveNthFromEnd(t *testing.T) {
 				1, nil,
 			},
 			1,
-			&ListNode{},
+			nil,
 		},
 		{
 			&ListNode{
