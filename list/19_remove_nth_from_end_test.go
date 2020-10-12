@@ -32,6 +32,25 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return dummy.Next
 }
 
+func removeNthFromEnd2(head *ListNode, n int) *ListNode {
+
+	dummy := &ListNode{}
+	dummy.Next = head
+	first := dummy
+	second := dummy
+
+	for i := 1; i <= n+1; i++ {
+		first = first.Next
+	}
+
+	for first != nil {
+		first = first.Next
+		second = second.Next
+	}
+	second.Next = second.Next.Next
+	return dummy.Next
+}
+
 func TestRemoveNthFromEnd(t *testing.T) {
 	tests := []struct {
 		in1 *ListNode
@@ -82,7 +101,7 @@ func TestRemoveNthFromEnd(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("rm(%d)%s", tt.in2, tt.in1.Visualize()), func(t *testing.T) {
-			got := removeNthFromEnd(tt.in1, tt.in2)
+			got := removeNthFromEnd2(tt.in1, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 				if got != nil && tt.out != nil {
