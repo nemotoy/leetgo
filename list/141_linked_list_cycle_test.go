@@ -8,6 +8,14 @@ import (
 	## summary
 */
 func hasCycle(head *ListNode) bool {
+	dictionary := make(map[*ListNode]bool)
+	for head != nil {
+		if dictionary[head] {
+			return true
+		}
+		dictionary[head] = true
+		head = head.Next
+	}
 	return false
 }
 
@@ -16,30 +24,30 @@ func TestHasCycle(t *testing.T) {
 		in  *ListNode
 		out bool
 	}{
-		{
-			&ListNode{
-				3,
-				&ListNode{
-					2,
-					&ListNode{
-						0,
-						&ListNode{
-							-4, nil,
-						},
-					},
-				},
-			},
-			true,
-		},
-		{
-			&ListNode{
-				1,
-				&ListNode{
-					2, nil,
-				},
-			},
-			true,
-		},
+		// {
+		// 	&ListNode{
+		// 		3,
+		// 		&ListNode{
+		// 			2,
+		// 			&ListNode{
+		// 				0,
+		// 				&ListNode{
+		// 					-4, nil,
+		// 				},
+		// 			},
+		// 		},
+		// 	},
+		// 	true,
+		// },
+		// {
+		// 	&ListNode{
+		// 		1,
+		// 		&ListNode{
+		// 			2, nil,
+		// 		},
+		// 	},
+		// 	true,
+		// },
 		{
 			&ListNode{
 				1, nil,
