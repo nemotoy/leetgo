@@ -1,16 +1,10 @@
-package list
+package tree
 
 import (
 	"fmt"
 	"reflect"
 	"testing"
 )
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 /*
 	## summary
