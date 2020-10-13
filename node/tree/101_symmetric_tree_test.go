@@ -14,9 +14,22 @@ type TreeNode struct {
 
 /*
 	## summary
+	中央値を境にシンメトリーになっているか。（Tree左辺の左辺と右辺の左辺が同一、またその逆も同一であること。）
+
+	1. 再帰
 */
 func isSymmetric(root *TreeNode) bool {
-	return false
+	return isMirror(root, root)
+}
+
+func isMirror(t1, t2 *TreeNode) bool {
+	if t1 == nil && t2 == nil {
+		return true
+	}
+	if t1 == nil || t2 == nil {
+		return false
+	}
+	return t1.Val == t2.Val && isMirror(t1.Right, t2.Left) && isMirror(t1.Left, t2.Right)
 }
 
 func TestIsSymmetric(t *testing.T) {
