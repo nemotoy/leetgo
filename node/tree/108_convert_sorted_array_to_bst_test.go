@@ -13,10 +13,11 @@ import (
 	1. 配列の中央をdepth:0の値とし、その左を左辺、右を右辺としてTreeNodeを生成する。
 */
 func sortedArrayToBST(nums []int) *TreeNode {
-	if len(nums) == 0 {
+	l := len(nums)
+	if l == 0 {
 		return nil
 	}
-	mid := len(nums) / 2
+	mid := l / 2
 	return &TreeNode{
 		Val:   nums[mid],
 		Left:  sortedArrayToBST(nums[:mid]),
