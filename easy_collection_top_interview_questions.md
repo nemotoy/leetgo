@@ -32,6 +32,7 @@
 
 - [101. Symmetric Tree](node/tree/101_symmetric_tree_test.go)
 - [104. Maximum Depth of Binary Tree](node/tree/104_maximum_depth_of_binary_tree_test.go)
+- [108. Convert Sorted Array to Binary Search Tree](node/tree/108_convert_sorted_array_to_bst_test.go)
 
 ## Sorting and Searching
 
