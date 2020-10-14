@@ -31,6 +31,7 @@
 ## Trees
 
 - [101. Symmetric Tree](node/tree/101_symmetric_tree_test.go)
+- [104. Maximum Depth of Binary Tree](node/tree/104_maximum_depth_of_binary_tree_test.go)
 
 ## Sorting and Searching
 
