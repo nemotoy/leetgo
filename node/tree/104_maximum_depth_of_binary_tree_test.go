@@ -8,13 +8,15 @@ import (
 
 /*
 	## summary
-
-
+	最深度を返す。
 */
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
+	// NOTE: nodeを左辺・右辺に分け、深度が大きい方を返す。
+	// maxDepth()を再帰呼び出しすることで、探索する。
+	// 1を加算しているのは、root.Valの1。
 	return 1 + Max(maxDepth(root.Left), maxDepth(root.Right))
 }
 
