@@ -8,9 +8,21 @@ import (
 
 /*
 	## summary
+
+
 */
 func maxDepth(root *TreeNode) int {
-	return 0
+	if root == nil {
+		return 0
+	}
+	return 1 + Max(maxDepth(root.Left), maxDepth(root.Right))
+}
+
+func Max(x, y int) int {
+	if x < y {
+		return y
+	}
+	return x
 }
 
 func TestMaxDepth(t *testing.T) {
