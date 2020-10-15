@@ -8,24 +8,31 @@ import (
 
 /*
 	## summary
-	与えられたTreeNodeがBSTかどうかを評価する。
-	等号は含まれない。
+	与えられたTreeNodeがBSTかどうかを評価する。等号は含まれない。
 */
 func isValidBST(root *TreeNode) bool {
-	if root == nil {
+	return helper(root, nil, nil)
+}
+
+// 型シグネチャのlower/upperには 0 も含まれるので、ポインタ型で定義する。
+func helper(node *TreeNode, lower, upper *int) bool {
+	if node == nil {
 		return true
 	}
-	if root.Left != nil {
-		if root.Left.Val >= root.Val {
-			return false
-		}
+	val := node.Val
+	if lower != nil && val <= *lower {
+		return false
 	}
-	if root.Right != nil {
-		if root.Val >= root.Right.Val {
-			return false
-		}
+	if upper != nil && val >= *upper {
+		return false
 	}
-	return isValidBST(root.Left) && isValidBST(root.Right)
+	if !helper(node.Left, lower, &val) {
+		return false
+	}
+	if !helper(node.Right, &val, upper) {
+		return false
+	}
+	return true
 }
 
 func TestIsValidBST(t *testing.T) {
@@ -68,6 +75,24 @@ func TestIsValidBST(t *testing.T) {
 				Val: 1,
 				Left: &TreeNode{
 					Val: 1,
+				},
+			},
+			false,
+		},
+		{
+			&TreeNode{
+				Val: 10,
+				Left: &TreeNode{
+					Val: 5,
+				},
+				Right: &TreeNode{
+					Val: 15,
+					Left: &TreeNode{
+						Val: 6,
+					},
+					Right: &TreeNode{
+						Val: 20,
+					},
 				},
 			},
 			false,
