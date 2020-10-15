@@ -17,12 +17,16 @@ func levelOrder(root *TreeNode) [][]int {
 }
 
 func levelOrderHelper(node *TreeNode, r *[][]int, depth int) {
+	// nodeがなければ探索を終了する
 	if node == nil {
 		return
 	}
+	// 結果rのindex = depthを表現している。depthに初到達した場合に、結果のindexのvalueを初期化する。
+	// 結果rはポインタ型で、右辺評価時は len(r) = depth + 1 であり2回目に同じdepthを評価する際には初期化されない。
 	if depth >= len(*r) {
 		*r = append(*r, []int{})
 	}
+	// 左から探索するためそのままappendできる
 	(*r)[depth] = append((*r)[depth], node.Val)
 	levelOrderHelper(node.Left, r, depth+1)
 	levelOrderHelper(node.Right, r, depth+1)
