@@ -9,13 +9,21 @@ import (
 /*
 	## summary
 	与えられたTreeNodeがBSTかどうかを評価する。
+	等号は含まれない。
 */
 func isValidBST(root *TreeNode) bool {
-	if root == nil || root.Left == nil || root.Right == nil {
+	if root == nil {
 		return true
 	}
-	if root.Left.Val > root.Val || root.Val > root.Right.Val {
-		return false
+	if root.Left != nil {
+		if root.Left.Val >= root.Val {
+			return false
+		}
+	}
+	if root.Right != nil {
+		if root.Val >= root.Right.Val {
+			return false
+		}
 	}
 	return isValidBST(root.Left) && isValidBST(root.Right)
 }
@@ -51,6 +59,15 @@ func TestIsValidBST(t *testing.T) {
 					Right: &TreeNode{
 						Val: 6,
 					},
+				},
+			},
+			false,
+		},
+		{
+			&TreeNode{
+				Val: 1,
+				Left: &TreeNode{
+					Val: 1,
 				},
 			},
 			false,
