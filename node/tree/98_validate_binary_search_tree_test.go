@@ -15,6 +15,7 @@ func isValidBST(root *TreeNode) bool {
 }
 
 // 型シグネチャのlower/upperには 0 も含まれるので、ポインタ型で定義する。
+// 再帰的に左辺・右辺のサブツリーを探索する。nodeがnilになる場合に真を返す。
 func helper(node *TreeNode, lower, upper *int) bool {
 	if node == nil {
 		return true
