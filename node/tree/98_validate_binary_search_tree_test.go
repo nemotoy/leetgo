@@ -26,13 +26,7 @@ func helper(node *TreeNode, lower, upper *int) bool {
 	if upper != nil && val >= *upper {
 		return false
 	}
-	if !helper(node.Left, lower, &val) {
-		return false
-	}
-	if !helper(node.Right, &val, upper) {
-		return false
-	}
-	return true
+	return helper(node.Left, lower, &val) && helper(node.Right, &val, upper)
 }
 
 func TestIsValidBST(t *testing.T) {
