@@ -32,6 +32,15 @@ s := "abc"
 i := 1
 s = s[:i] + s[i+1:]
 fmt.Println("expeted: ac, got: ", s)
+
+// 隣接する文字列が一致しないようするために削除する要素数
+var result 32
+for i := 0; i < len(s)-1; i++ {
+    if s[i] == s[i+1] {
+        result++
+    }
+}
+// TODO: 文字列の出現回数
 ```
 
 ## 配列操作
