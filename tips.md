@@ -26,6 +26,12 @@ for _, r := range s {
     count[r-'a'] += 1
 }
 fmt.Println("expected: [1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], got: ", count)
+
+// 文字列のあるindex要素を削除する
+s := "abc"
+i := 1
+s = s[:i] + s[i+1:]
+fmt.Println("expeted: ac, got: ", s)
 ```
 
 ## 配列操作
