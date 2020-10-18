@@ -10,20 +10,20 @@ import (
 	## summary
 */
 func judgeCircle(moves string) bool {
-	var c int
+	var ud, lr int
 	for i := 0; i < len(moves); i++ {
 		switch moves[i] {
 		case 'U':
-			c += 1
+			ud += 1
 		case 'D':
-			c -= 1
+			ud -= 1
 		case 'L':
-			c += 2
+			lr += 1
 		case 'R':
-			c -= 2
+			lr -= 1
 		}
 	}
-	return c == 0
+	return ud == 0 && lr == 0
 }
 
 func TestJudgeCircle(t *testing.T) {
