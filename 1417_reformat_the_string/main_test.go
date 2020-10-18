@@ -19,18 +19,26 @@ func reformat(s string) string {
 			let += string(r)
 		}
 	}
-	if let == "" || dig == "" {
+	if (let == "" && len(dig) > 1) || (dig == "" && len(let) > 1) {
 		return ""
 	}
-	fmt.Println(let, dig)
 	res := ""
 	if len(let) > len(dig) {
 		let, dig = dig, let
 	}
-	for i := 0; i < len(s)/2; i++ {
-		res += string(dig[i])
-		res += string(let[i])
-		fmt.Println(res)
+	var i, j int
+	for c := 0; c < len(s); c++ {
+		if i > len(dig) && j > len(let) {
+			break
+		}
+		if i < len(dig) {
+			res += string(dig[i])
+			i++
+		}
+		if j < len(let) {
+			res += string(let[j])
+			j++
+		}
 	}
 	return res
 }
@@ -48,6 +56,9 @@ func TestReformat(t *testing.T) {
 		},
 		{
 			"covid2019", "c2o0v1i9d",
+		},
+		{
+			"j", "j",
 		},
 	}
 	for _, tt := range tests {
