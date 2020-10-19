@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -42,6 +43,19 @@ func numUniqueEmails(emails []string) int {
 				break
 			}
 		}
+	}
+	return len(hashTable)
+}
+
+func numUniqueEmails2(emails []string) int {
+	hashTable := make(map[string]bool)
+	for _, email := range emails {
+		splitedEmail := strings.Split(email, "@")
+		local, domain := splitedEmail[0], splitedEmail[1]
+		splitedLocal := strings.Split(strings.ReplaceAll(local, ".", ""), "+")
+		realLocal := splitedLocal[0]
+		realEmail := realLocal + "@" + domain
+		hashTable[realEmail] = true
 	}
 	return len(hashTable)
 }
