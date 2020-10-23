@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"strings"
 	"testing"
 )
@@ -9,17 +10,25 @@ import (
 	## summary
 */
 func reverseWords(s string) string {
-	ss := strings.Split(s, " ")
-	res := ""
-	l := len(ss) - 1
-	for i, v := range ss {
-		tail := " "
-		if l == i {
-			tail = ""
+
+	words := strings.Split(s, " ")
+	sb := &bytes.Buffer{}
+	l := len(words)
+	for i, s := range words {
+		var sr = []byte(s)
+		reverseString(sr)
+		sb.Write(sr)
+		if i < l-1 {
+			sb.WriteRune(' ')
 		}
-		res += reverse(v) + tail
 	}
-	return res
+	return sb.String()
+}
+
+func reverseString(s []byte) {
+	for i, j := len(s)-1, 0; i > j; i, j = i-1, j+1 {
+		s[i], s[j] = s[j], s[i]
+	}
 }
 
 func reverse(s string) string {
