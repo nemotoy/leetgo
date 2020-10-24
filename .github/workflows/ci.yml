@@ -17,10 +17,6 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: ${{ matrix.go }}
-    - name: Lint
-      uses: golangci/golangci-lint-action@v1
-      with:
-          version: v1.30
     - name: Use cache dependencies
       uses: actions/cache@v1
       id: cache
