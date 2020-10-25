@@ -12,9 +12,15 @@ import (
 */
 func find132pattern(nums []int) bool {
 	for i := 0; i < len(nums); i++ {
+		ni := nums[i]
 		for j := i + 1; j < len(nums); j++ {
+			nj := nums[j]
+			if ni > nj {
+				break
+			}
 			for k := j + 1; k < len(nums); k++ {
-				if nums[i] < nums[k] && nums[k] < nums[j] {
+				nk := nums[k]
+				if ni < nk && nk < nj {
 					return true
 				}
 			}
