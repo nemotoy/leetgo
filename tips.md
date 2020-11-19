@@ -86,3 +86,7 @@ fmt.Println("expeted: [1 2 3 4], got: ", nums)
 ## References
 
 - [SliceTricks](https://github.com/golang/go/wiki/SliceTricks)
+- [slices-intro](https://blog.golang.org/slices-intro)
+- [slices](https://blog.golang.org/slices)
+- [effective_go.html#slices](https://golang.org/doc/effective_go.html#slices)
+- [spec#Appending_and_copying_slices](https://golang.org/ref/spec#Appending_and_copying_slices)
