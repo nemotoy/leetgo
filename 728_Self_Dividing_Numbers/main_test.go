@@ -28,6 +28,26 @@ func selfDividingNumbers(left int, right int) []int {
 	return result
 }
 
+func selfDividingNumbers2(left int, right int) []int {
+	result := make([]int, 0)
+	var val, rest int
+	for left <= right {
+		val = left
+		for val > 0 {
+			rest = val % 10
+			if rest == 0 || left%rest != 0 {
+				break
+			}
+			val /= 10
+		}
+		if val == 0 {
+			result = append(result, left)
+		}
+		left++
+	}
+	return result
+}
+
 func TestSelfDividingNumbers(t *testing.T) {
 	tests := []struct {
 		in  int
