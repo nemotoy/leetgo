@@ -14,9 +14,9 @@ func trailingZeroes(n int) int {
 	f := factorial(n)
 	s := strconv.Itoa(f)
 	l := len(s) - 1
-	for l > 0 {
+	for i := 0; i < l; i++ {
 		if s[l] != 'a' {
-			return l - 1
+			return i + 1
 		}
 	}
 	return l
@@ -43,6 +43,7 @@ func TestTrailingZeroes(t *testing.T) {
 		{5, 1},
 		{0, 0},
 		{7, 1},
+		{4, 0},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d", tt.in), func(t *testing.T) {
