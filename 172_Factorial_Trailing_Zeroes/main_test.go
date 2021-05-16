@@ -3,35 +3,17 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"strconv"
 	"testing"
 )
 
+// https://brilliant.org/wiki/trailing-number-of-zeros/
 func trailingZeroes(n int) int {
-	if n <= 0 {
-		return 0
+	i, res := 5, 0
+	for n >= i {
+		res += n / i
+		i *= 5
 	}
-	f := factorial(n)
-	s := strconv.Itoa(f)
-	l := len(s) - 1
-	for i := 0; i < l; i++ {
-		if s[l] != 'a' {
-			return i + 1
-		}
-	}
-	return l
-}
-
-func factorial(n int) int {
-	// if n <= 0 {
-	// 	return 0
-	// }
-	ret := 1
-	for n > 1 {
-		ret *= n
-		n--
-	}
-	return ret
+	return res
 }
 
 func TestTrailingZeroes(t *testing.T) {
