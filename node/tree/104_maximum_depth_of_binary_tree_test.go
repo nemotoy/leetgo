@@ -17,10 +17,10 @@ func maxDepth(root *TreeNode) int {
 	// NOTE: nodeを左辺・右辺に分け、深度が大きい方を返す。
 	// maxDepth()を再帰呼び出しすることで、探索する。
 	// 1を加算しているのは、root.Valの1。
-	return 1 + Max(maxDepth(root.Left), maxDepth(root.Right))
+	return 1 + max(maxDepth(root.Left), maxDepth(root.Right))
 }
 
-func Max(x, y int) int {
+func max(x, y int) int {
 	if x < y {
 		return y
 	}
