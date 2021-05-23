@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -31,6 +32,11 @@ func interpret(command string) string {
 		}
 	}
 	return ret
+}
+
+func interpret2(command string) string {
+	s := strings.ReplaceAll(command, "()", "o")
+	return strings.ReplaceAll(s, "(al)", "al")
 }
 
 func TestInterpret(t *testing.T) {
