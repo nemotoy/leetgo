@@ -37,6 +37,15 @@ func shiftAlps(r rune, n int) rune {
 	return 0
 }
 
+func replaceDigits2(s string) string {
+	ret := []byte(s)
+	// 奇数番目を走査する。
+	for i := 1; i < len(s); i += 2 {
+		ret[i] = ret[i-1] + ret[i] - '0'
+	}
+	return string(ret)
+}
+
 func TestReplaceDigits(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -51,7 +60,7 @@ func TestReplaceDigits(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := replaceDigits(tt.in)
+			got := replaceDigits2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
