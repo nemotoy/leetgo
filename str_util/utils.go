@@ -1,6 +1,6 @@
 package strutil
 
-func GetVowelsNumber(s string) int {
+func CountVowels(s string) int {
 	ret := 0
 	for _, r := range s {
 		switch r {
