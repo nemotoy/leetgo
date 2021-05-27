@@ -10,3 +10,11 @@ func CountVowels(s string) int {
 	}
 	return ret
 }
+
+func IsVowel(r byte) bool {
+	switch r {
+	case 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U':
+		return true
+	}
+	return false
+}
