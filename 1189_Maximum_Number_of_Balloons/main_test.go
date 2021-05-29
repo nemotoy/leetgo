@@ -32,6 +32,28 @@ func maxNumberOfBalloons(text string) int {
 	return ret
 }
 
+func maxNumberOfBalloons2(text string) int {
+	// アルファベット数の要素を持つ配列を初期化する
+	var chars [26]int
+	// inputに含まれるアルファベット数を集計する
+	for _, r := range text {
+		chars[r-'a'] += 1
+	}
+	ret := chars[1]             // b
+	ret = min(ret, chars[0])    // a
+	ret = min(ret, chars[11]/2) // l*2
+	ret = min(ret, chars[14]/2) // o*2
+	ret = min(ret, chars[13])   // n
+	return ret
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
 func TestMaxNumberOfBalloons(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -52,7 +74,7 @@ func TestMaxNumberOfBalloons(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := maxNumberOfBalloons(tt.in)
+			got := maxNumberOfBalloons2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
