@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"testing"
-	"unicode"
 )
 
 /*
@@ -14,42 +13,24 @@ import (
 	badな文字列はその要素同士を削除する。
 */
 func makeGood(s string) string {
-	if len(s) < 2 {
-		return s
-	}
-	i, l := 0, len(s)-1
-	for i < l {
-		if unicode.IsUpper(rune(s[i])) {
-			fmt.Println("upper", i, s[i], s[i+1], string(s[i]), string(s[i+1]))
-			if IsSameLetter(s[i+1], s[i]) {
-				if len(s) == 2 {
-					s = ""
-					break
-				}
-				s = s[:i] + s[i+2:]
-				i, l = 0, len(s)-1
-				fmt.Println("upper.1", s, i, l)
+	l := len(s)
+	for i := 0; i < l-1; {
+		if IsSameLetter(s[i], s[i+1]) {
+			s = s[:i] + s[i+2:]
+			l -= 2
+			if i > 0 {
+				i--
 			}
-		} else {
-			if IsSameLetter(s[i], s[i+1]) {
-				fmt.Println("lower")
-				if len(s) == 2 {
-					s = ""
-					break
-				}
-				s = s[:i] + s[i+2:]
-				i, l = 0, len(s)-1
-				fmt.Println("upper.1", s, i, l)
-			}
+			continue
 		}
 		i++
 	}
 	return s
 }
 
-// a > b
+// 同じ文字か（ただし、大文字・小文字の組み合わせ）を評価する
 func IsSameLetter(a, b byte) bool {
-	return a > b && a-b == 32
+	return a == b+32 || a == b-32
 }
 
 func TestMakeGood(t *testing.T) {
