@@ -28,6 +28,18 @@ func makeGood(s string) string {
 	return s
 }
 
+func makeGood2(s string) string {
+	stack := make([]byte, 0, len(s))
+	for i := range s {
+		if len(stack) > 0 && IsSameLetter(s[i], stack[len(stack)-1]) {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, s[i])
+		}
+	}
+	return string(stack)
+}
+
 // 同じ文字か（ただし、大文字・小文字の組み合わせ）を評価する
 func IsSameLetter(a, b byte) bool {
 	return a == b+32 || a == b-32
@@ -47,7 +59,7 @@ func TestMakeGood(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := makeGood(tt.in)
+			got := makeGood2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
