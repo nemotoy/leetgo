@@ -12,15 +12,19 @@ import (
   out: second largest numerical digit that appears in s or -1 if it does not exist
 */
 func secondHighest(s string) int {
-	ret := -1
+	first, second := -1, -1
 	for i := 0; i < len(s); i++ {
-		b := s[i]
-		n, err := strconv.ParseInt(string(b), 0, 64)
-		if err == nil && int(n) > ret {
-			ret = int(n)
+		n, err := strconv.Atoi(string(s[i]))
+		if err == nil {
+			// s is a numeric.
+			if n > first {
+				second, first = first, n
+			} else if n < first && n > second {
+				second = n
+			}
 		}
 	}
-	return ret
+	return second
 }
 
 func TestSecondHighest(t *testing.T) {
@@ -33,6 +37,9 @@ func TestSecondHighest(t *testing.T) {
 		},
 		{
 			"abc1111", -1,
+		},
+		{
+			"ck077", 0,
 		},
 	}
 	for _, tt := range tests {
