@@ -27,6 +27,26 @@ func secondHighest(s string) int {
 	return second
 }
 
+func secondHighest2(s string) int {
+	first, second := -1, -1
+	for _, r := range s {
+		if r < '0' || r > '9' {
+			continue
+		}
+		n := int(r - '0')
+		if n > first {
+			second, first = first, n
+		} else if n < first && n > second {
+			second = n
+		}
+	}
+	return second
+}
+
+func isNumeric(r rune) bool {
+	return r < '0' || r > '9'
+}
+
 func TestSecondHighest(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -44,7 +64,7 @@ func TestSecondHighest(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := secondHighest(tt.in)
+			got := secondHighest2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
