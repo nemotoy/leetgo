@@ -39,6 +39,11 @@ for i := 0; i < len(s)-1; i++ {
         result++
     }
 }
+
+func isNumeric(r rune) bool {
+	return r < '0' || r > '9'
+}
+
 /*
   ## TODO
   - 文字列の出現回数
