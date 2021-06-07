@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -24,6 +25,14 @@ func maxRepeating(sequence string, word string) int {
 		}
 	}
 	return ret
+}
+
+func maxRepeating2(sequence string, word string) int {
+	ret := 1
+	for strings.Contains(sequence, strings.Repeat(word, ret)) {
+		ret++
+	}
+	return ret - 1
 }
 
 func TestIsMaxRepeating(t *testing.T) {
