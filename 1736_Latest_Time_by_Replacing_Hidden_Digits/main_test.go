@@ -10,40 +10,34 @@ import (
 	in: time(hh:mm) some of digits in the string are hidden(represented by ?)
 	out: time
 */
-// nolint:gocritic
 func maximumTime(time string) string {
 	ret := []byte(time)
-	if time[0] == '?' && time[1] == '?' {
+	switch {
+	case time[0] == '?' && time[1] == '?':
 		ret[0] = '2'
 		ret[1] = '3'
-	} else if time[0] == '?' {
+	case time[0] == '?':
 		if time[1] < '4' {
 			ret[0] = '2'
 		} else {
 			ret[0] = '1'
 		}
-	} else if time[1] == '?' {
+	case time[1] == '?':
 		if time[0] == '2' {
 			ret[1] = '3'
 		} else {
 			ret[1] = '9'
 		}
 	}
-	if time[3] == '?' && time[4] == '?' {
+
+	switch {
+	case time[3] == '?' && time[4] == '?':
 		ret[3] = '5'
 		ret[4] = '9'
-	} else if time[3] == '?' {
-		if time[4] != '0' {
-			ret[3] = '5'
-		} else {
-			ret[3] = '5'
-		}
-	} else if time[4] == '?' {
-		if time[3] == '6' {
-			ret[4] = '0'
-		} else {
-			ret[4] = '9'
-		}
+	case time[3] == '?':
+		ret[3] = '5'
+	case time[4] == '?':
+		ret[4] = '9'
 	}
 	return string(ret)
 }
