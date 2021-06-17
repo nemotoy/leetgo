@@ -44,6 +44,16 @@ func isNumeric(r rune) bool {
 	return r < '0' || r > '9'
 }
 
+// a->0, b->1 ...
+func sum(s string) int {
+	ret := 0
+	for _, r := range s {
+		// 桁数を上げるために*10
+		ret = ret*10 + int(r-'a')
+	}
+	return ret
+}
+
 /*
   ## TODO
   - 文字列の出現回数
