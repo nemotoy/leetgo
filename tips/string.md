@@ -54,6 +54,11 @@ func sum(s string) int {
 	return ret
 }
 
+// reverse
+for i, j := 0, len(ret)-1; i < j; i, j = i+1, j-1 {
+  ret[i], ret[j] = ret[j], ret[i]
+}
+
 /*
   ## TODO
   - 文字列の出現回数
