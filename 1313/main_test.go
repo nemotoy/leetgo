@@ -13,14 +13,13 @@ import (
 */
 func decompressRLElist(nums []int) []int {
 	ret := []int{}
-	for i := 0; i < len(nums); {
-		freq, val := nums[i], nums[i+1]
+	for i := 0; i < len(nums)/2; i++ {
+		freq, val := nums[2*i], nums[2*i+1]
 		vals := make([]int, freq)
 		for j := 0; j < freq; j++ {
 			vals[j] = val
 		}
 		ret = append(ret, vals...)
-		i += 2
 	}
 	return ret
 }
