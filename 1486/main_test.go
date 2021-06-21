@@ -10,13 +10,9 @@ import (
 	## summary
 */
 func xorOperation(n int, start int) int {
-	nums := make([]int, 0, n)
-	for i := 0; i < n; i++ {
-		nums = append(nums, start+2*i)
-	}
 	ret := 0
-	for _, n := range nums {
-		ret ^= n
+	for i := 0; i < n; i++ {
+		ret ^= start + 2*i
 	}
 	return ret
 }
