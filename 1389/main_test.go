@@ -22,6 +22,15 @@ func createTargetArray(nums []int, index []int) []int {
 	return ret
 }
 
+func createTargetArray2(nums []int, index []int) []int {
+	ret := make([]int, 0, len(nums))
+	for i, ind := range index {
+		ret = append(ret[:ind+1], ret[ind:]...)
+		ret[ind] = nums[i]
+	}
+	return ret
+}
+
 func TestCreateTargetArray(t *testing.T) {
 	tests := []struct {
 		in1 []int
@@ -46,7 +55,7 @@ func TestCreateTargetArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("nums: %v, index: %v", tt.in1, tt.in2), func(t *testing.T) {
-			got := createTargetArray(tt.in1, tt.in2)
+			got := createTargetArray2(tt.in1, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
