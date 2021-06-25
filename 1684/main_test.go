@@ -47,6 +47,24 @@ func countConsistentStrings2(allowed string, words []string) int {
 	return ret
 }
 
+func countConsistentStrings3(allowed string, words []string) int {
+	// codepoint
+	var chars [123]int
+	for _, r := range allowed {
+		chars[r] += 1
+	}
+	ret := len(words)
+	for _, word := range words {
+		for _, r := range word {
+			if chars[r] < 1 {
+				ret--
+				break
+			}
+		}
+	}
+	return ret
+}
+
 func TestCountConsistentStrings(t *testing.T) {
 	tests := []struct {
 		in  string
