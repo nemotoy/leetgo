@@ -26,6 +26,12 @@ for _, r := range s {
 }
 fmt.Println("expected: [1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0], got: ", count)
 
+// codepoint表現
+var chars [123]int
+for _, r := range text {
+  chars[r] += 1
+}
+
 // 文字列のあるindex要素を削除する
 s := "abc"
 i := 1
