@@ -28,6 +28,25 @@ func countConsistentStrings(allowed string, words []string) int {
 	return ret
 }
 
+func countConsistentStrings2(allowed string, words []string) int {
+	// アルファベット長の配列を作成し、その数をincrementする。
+	var chars [26]int
+	for _, r := range allowed {
+		chars[r-'a'] += 1
+	}
+	// 最大値はwordsの要素数。条件に該当しない場合はdecrementする
+	ret := len(words)
+	for _, word := range words {
+		for _, r := range word {
+			if chars[r-'a'] < 1 {
+				ret--
+				break
+			}
+		}
+	}
+	return ret
+}
+
 func TestCountConsistentStrings(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -46,7 +65,7 @@ func TestCountConsistentStrings(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := countConsistentStrings(tt.in, tt.in2)
+			got := countConsistentStrings2(tt.in, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
