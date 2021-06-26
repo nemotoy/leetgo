@@ -12,20 +12,19 @@ import (
 */
 func countGoodRectangles(rectangles [][]int) int {
 	squareLengths := make([]int, len(rectangles))
+	max := 0
 	// get minimum values each rectangles
 	for i, regrectangle := range rectangles {
-		h, w := regrectangle[0], regrectangle[1]
-		squareLengths[i] = min(h, w)
+		l := min(regrectangle[0], regrectangle[1])
+		squareLengths[i] = l
+		if max < l {
+			max = l
+		}
 	}
-	ret, max := 0, 0
+	ret := 0
 	// get the number of max length
 	for _, length := range squareLengths {
-		if max < length {
-			max = length
-			// because of replacing with length, resets the ret,
-			ret = 0
-			ret++
-		} else if max == length {
+		if max == length {
 			ret++
 		}
 	}
