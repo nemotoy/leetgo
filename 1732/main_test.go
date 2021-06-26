@@ -24,6 +24,17 @@ func largestAltitude(gain []int) int {
 	return ret
 }
 
+func largestAltitude2(gain []int) int {
+	currentAltitude, ret := 0, 0
+	for _, h := range gain {
+		currentAltitude += h
+		if ret < currentAltitude {
+			ret = currentAltitude
+		}
+	}
+	return ret
+}
+
 func TestLargestAltitude(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -41,7 +52,7 @@ func TestLargestAltitude(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := largestAltitude(tt.in)
+			got := largestAltitude2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %d, want: %d", got, tt.out)
 			}
