@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"strconv"
 	"testing"
 )
 
@@ -14,8 +13,13 @@ import (
 func findNumbers(nums []int) int {
 	ret := 0
 	for _, n := range nums {
-		s := strconv.Itoa(n)
-		if len(s)%2 == 0 {
+		digits := 0
+		for n != 0 {
+			n /= 10
+			digits++
+		}
+		// if event number this digits
+		if digits%2 == 0 {
 			ret++
 		}
 	}
