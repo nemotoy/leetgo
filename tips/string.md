@@ -65,6 +65,13 @@ for i, j := 0, len(ret)-1; i < j; i, j = i+1, j-1 {
   ret[i], ret[j] = ret[j], ret[i]
 }
 
+// Intから桁数を算出する
+digits := 0
+for n != 0 {
+  n /= 10
+  digits++
+}
+
 /*
   ## TODO
   - 文字列の出現回数
