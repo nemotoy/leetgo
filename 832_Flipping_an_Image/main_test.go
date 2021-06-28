@@ -10,7 +10,24 @@ import (
 	## summary
 */
 func flipAndInvertImage(image [][]int) [][]int {
-	return [][]int{}
+	for _, v := range image {
+		// flip
+		for i, j := 0, len(v)-1; i < j; i, j = i+1, j-1 {
+			v[i], v[j] = v[j], v[i]
+		}
+		// invert
+		for k := 0; k < len(v); k++ {
+			v[k] = invert(v[k])
+		}
+	}
+	return image
+}
+
+func invert(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return 0
 }
 
 func TestFlipAndInvertImage(t *testing.T) {
@@ -39,8 +56,8 @@ func TestFlipAndInvertImage(t *testing.T) {
 			},
 			[][]int{
 				{1, 1, 0, 0},
-				{0, 1, 1, 1},
-				{0, 1, 1, 1},
+				{0, 1, 1, 0},
+				{0, 0, 0, 1},
 				{1, 0, 1, 0},
 			},
 		},
