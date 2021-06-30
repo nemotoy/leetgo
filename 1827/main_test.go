@@ -22,6 +22,18 @@ func minOperations(nums []int) int {
 	return ret
 }
 
+func minOperations2(nums []int) int {
+	ret := 0
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i] >= nums[i+1] {
+			// 等価も含むので1を加算する
+			ret += nums[i] - nums[i+1] + 1
+			nums[i+1] = nums[i] + 1
+		}
+	}
+	return ret
+}
+
 func TestMinOperations(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -33,7 +45,7 @@ func TestMinOperations(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := minOperations(tt.in)
+			got := minOperations2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
