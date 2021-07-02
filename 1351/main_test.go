@@ -21,19 +21,23 @@ func countNegatives(grid [][]int) int {
 	return ret
 }
 
-// func max(x, y int) int {
-// 	if x < y {
-// 		return y
-// 	}
-// 	return x
-// }
-
-// func abs(x int) int {
-// 	if x < 1 {
-// 		return -x
-// 	}
-// 	return x
-// }
+// binary search
+func countNegatives2(grid [][]int) int {
+	ret := 0
+	for i := 0; i < len(grid); i++ {
+		start, end := 0, len(grid[i])-1
+		for start <= end {
+			mid := (start + end) / 2
+			if grid[i][mid] < 0 {
+				end = mid - 1
+			} else {
+				start = mid + 1
+			}
+		}
+		ret += len(grid[i]) - start
+	}
+	return ret
+}
 
 func TestCountNegatives(t *testing.T) {
 	tests := []struct {
@@ -49,7 +53,7 @@ func TestCountNegatives(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := countNegatives(tt.in)
+			got := countNegatives2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
