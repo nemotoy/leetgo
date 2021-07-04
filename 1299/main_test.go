@@ -25,6 +25,18 @@ func replaceElements(arr []int) []int {
 	return arr
 }
 
+func replaceElements2(arr []int) []int {
+	mx := -1
+	for i := len(arr) - 1; i >= 0; i-- {
+		if arr[i] > mx {
+			mx, arr[i] = arr[i], mx
+		} else {
+			arr[i] = mx
+		}
+	}
+	return arr
+}
+
 func max(x, y int) int {
 	if x < y {
 		return y
@@ -48,7 +60,7 @@ func TestReplaceElements(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := replaceElements(tt.in)
+			got := replaceElements2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
