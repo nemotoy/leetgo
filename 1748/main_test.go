@@ -24,6 +24,20 @@ func sumOfUnique(nums []int) int {
 	return ret
 }
 
+func sumOfUnique2(nums []int) int {
+	tmp := [101]int{}
+	for _, n := range nums {
+		tmp[n] += 1
+	}
+	ret := 0
+	for k, v := range tmp {
+		if v == 1 {
+			ret += k
+		}
+	}
+	return ret
+}
+
 func TestSumOfUnique(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -33,7 +47,7 @@ func TestSumOfUnique(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := sumOfUnique(tt.in)
+			got := sumOfUnique2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
