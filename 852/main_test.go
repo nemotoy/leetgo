@@ -25,6 +25,14 @@ func peakIndexInMountainArray(arr []int) int {
 	return ret
 }
 
+func peakIndexInMountainArray2(arr []int) int {
+	ret := 1
+	for arr[ret] < arr[ret+1] {
+		ret++
+	}
+	return ret
+}
+
 func TestPeakIndexInMountainArray(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -37,7 +45,7 @@ func TestPeakIndexInMountainArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := peakIndexInMountainArray(tt.in)
+			got := peakIndexInMountainArray2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
