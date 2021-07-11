@@ -9,7 +9,7 @@ import (
   ## summary
 */
 func buildArray(target []int, n int) []string {
-	ret := []string{}
+	ret := make([]string, 0, n*2)
 	for i, j := 1, 0; i <= n && j < len(target); i++ {
 		ret = append(ret, "Push")
 		if target[j] == i {
