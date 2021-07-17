@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"sort"
 	"strconv"
 	"testing"
 )
 
 /*
 	## summary
-	score[i] = rank
 */
 func findRelativeRanks(score []int) []string {
 	l := len(score)
@@ -38,6 +38,34 @@ func findRelativeRanks(score []int) []string {
 	return ret
 }
 
+func findRelativeRanks2(score []int) []string {
+	l := len(score)
+	sorted := make([]int, l)
+	copy(sorted, score)
+	sort.Slice(sorted, func(i, j int) bool {
+		return sorted[i] > sorted[j]
+	})
+	places := make(map[int]int, l)
+	for i := 0; i < len(sorted); i++ {
+		places[sorted[i]] = i + 1
+	}
+	ret := make([]string, 0, l)
+	for _, num := range score {
+		place := places[num]
+		switch place {
+		case 1:
+			ret = append(ret, "Gold Medal")
+		case 2:
+			ret = append(ret, "Silver Medal")
+		case 3:
+			ret = append(ret, "Bronze Medal")
+		default:
+			ret = append(ret, strconv.Itoa(place))
+		}
+	}
+	return ret
+}
+
 func TestFindRelativeRanks(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -54,7 +82,7 @@ func TestFindRelativeRanks(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := findRelativeRanks(tt.in)
+			got := findRelativeRanks2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
