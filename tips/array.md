@@ -26,6 +26,13 @@ fmt.Println("expeted: [1 2 4 5], got: ", nums)
 nums := []int{1, 2, 3, 4, 5}
 nums = nums[:len(nums)-1]
 fmt.Println("expeted: [1 2 3 4], got: ", nums)
+
+// 配列・スライスの探索においての隣接する値の評価
+for i := 0; i < len(nums); i++ {
+  if nums[i] == 0 && (i == 0 || nums[i-1] == 0) && (i == len(nums)-1 || nums[i+1] == 0) {
+    // do something.
+  }
+}
 ```
 
 ## References
