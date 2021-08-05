@@ -31,6 +31,18 @@ func decreasing(nums []int) bool {
 	return true
 }
 
+func isMonotonic2(nums []int) bool {
+	inc, dec := true, true
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i] > nums[i+1] {
+			inc = false
+		} else if nums[i] < nums[i+1] {
+			dec = false
+		}
+	}
+	return inc || dec
+}
+
 func TestIsMonotonic(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -42,7 +54,7 @@ func TestIsMonotonic(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := isMonotonic(tt.in)
+			got := isMonotonic2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
