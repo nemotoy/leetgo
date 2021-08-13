@@ -10,15 +10,15 @@ import (
 	## summary
 */
 func kLengthApart(nums []int, k int) bool {
-	count := 0
-	first := false
+	// initialize the counter of zero to k to pass if the first element is one.
+	count := k
 	for _, num := range nums {
 		if num == 1 {
-			if first && count < k {
+			if count < k {
 				return false
 			}
-			first = true
-			count = 0 // reset
+			// reset the counter to zero.
+			count = 0
 		} else {
 			count++
 		}
