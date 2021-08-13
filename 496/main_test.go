@@ -10,21 +10,20 @@ import (
 	## summary
 */
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
-	ans := make([]int, 0, len(nums1))
-	for _, num1 := range nums1 {
-		added := -1
+	ans := make([]int, len(nums1))
+	for i, num1 := range nums1 {
+		ans[i] = -1
 		for j, num2 := range nums2 {
 			if num1 == num2 {
 				// search next greater element
 				for _, n := range nums2[j:] {
 					if num2 < n {
-						added = n
+						ans[i] = n
 						break
 					}
 				}
 			}
 		}
-		ans = append(ans, added)
 	}
 	return ans
 }
