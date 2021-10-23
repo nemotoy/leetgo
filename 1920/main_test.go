@@ -16,6 +16,16 @@ func buildArray(nums []int) []int {
 	}
 	return ans
 }
+func buildArray1(nums []int) []int {
+	l := len(nums)
+	for i := 0; i < l; i++ {
+		nums[i] += l * (nums[nums[i]] % l)
+	}
+	for i := 0; i < l; i++ {
+		nums[i] /= l
+	}
+	return nums
+}
 
 func TestBuildArray(t *testing.T) {
 	tests := []struct {
@@ -33,7 +43,7 @@ func TestBuildArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := buildArray(tt.in)
+			got := buildArray1(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
