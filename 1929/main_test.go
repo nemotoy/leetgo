@@ -19,6 +19,11 @@ func getConcatenation(nums []int) []int {
 	return ans
 }
 
+func getConcatenation2(nums []int) []int {
+	nums = append(nums, nums...)
+	return nums
+}
+
 func TesGetConcatenation(t *testing.T) {
 	tests := []struct {
 		in  []int
@@ -35,7 +40,7 @@ func TesGetConcatenation(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := getConcatenation(tt.in)
+			got := getConcatenation2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
