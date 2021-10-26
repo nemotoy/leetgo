@@ -24,6 +24,19 @@ func countKDifference(nums []int, k int) int {
 	return ret
 }
 
+func countKDifference2(nums []int, k int) int {
+	m := make(map[int]int, len(nums))
+	for _, v := range nums {
+		m[v]++
+	}
+	ret := 0
+	for _, v := range nums {
+		c := v - k
+		ret += m[c]
+	}
+	return ret
+}
+
 func abs(x int) int {
 	if x < 1 {
 		return -x
@@ -49,7 +62,7 @@ func TestCountKDifference(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := countKDifference(tt.in, tt.in2)
+			got := countKDifference2(tt.in, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
