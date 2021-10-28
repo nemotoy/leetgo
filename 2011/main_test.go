@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -24,6 +25,18 @@ func finalValueAfterOperations(operations []string) int {
 	return x
 }
 
+func finalValueAfterOperations2(operations []string) int {
+	x := 0
+	for _, op := range operations {
+		if strings.Contains(op, "++") {
+			x++
+		} else {
+			x--
+		}
+	}
+	return x
+}
+
 func TestFinalValueAfterOperations(t *testing.T) {
 	tests := []struct {
 		in  []string
@@ -34,7 +47,7 @@ func TestFinalValueAfterOperations(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := finalValueAfterOperations(tt.in)
+			got := finalValueAfterOperations2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
