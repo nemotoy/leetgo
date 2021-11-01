@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -23,6 +24,11 @@ func maxProductDifference(nums []int) int {
 		}
 	}
 	return max1*max2 - min1*min2
+}
+
+func maxProductDifference2(nums []int) int {
+	sort.Ints(nums)
+	return nums[len(nums)-1]*nums[len(nums)-2] - nums[0]*nums[1]
 }
 
 func TestMaxProductDifference(t *testing.T) {
