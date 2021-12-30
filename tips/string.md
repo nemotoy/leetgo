@@ -65,6 +65,16 @@ for i, j := 0, len(ret)-1; i < j; i, j = i+1, j-1 {
   ret[i], ret[j] = ret[j], ret[i]
 }
 
+// 回文
+func isPalindrome(s string) bool {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		if s[i] != s[j] {
+			return false
+		}
+	}
+	return true
+}
+
 // Intから桁数を算出する
 digits := 0
 for n != 0 {
