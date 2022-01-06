@@ -103,12 +103,20 @@ func gcd(a, b int) int {
 	return gcd(b, a%b)
 }
 
+// reverse s from string
+func reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
 /*
   ## TODO
   - 文字列の出現回数
   - 部分文字列
   - 後方からの要素取得
-  - reverseString
   - アルファベット
 */
 
