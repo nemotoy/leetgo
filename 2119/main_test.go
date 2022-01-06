@@ -15,6 +15,11 @@ func isSameAfterReversals(num int) bool {
 	return num == reverse(reverse(num))
 }
 
+// 0はtrue, x0...はfalse
+func isSameAfterReversals2(num int) bool {
+	return num == 0 || num%10 != 0
+}
+
 func reverse(x int) int {
 	rev := 0
 	for x != 0 {
@@ -45,7 +50,7 @@ func TestIsSameAfterReversals(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%d", tt.in), func(t *testing.T) {
-			got := isSameAfterReversals(tt.in)
+			got := isSameAfterReversals2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
