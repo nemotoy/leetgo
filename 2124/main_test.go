@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -22,6 +23,11 @@ func checkString(s string) bool {
 	return true
 }
 
+// "b"の次のindexに"a"がなければよい
+func checkString2(s string) bool {
+	return !strings.Contains(s, "ba")
+}
+
 func TestCheckString(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -39,7 +45,7 @@ func TestCheckString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.in, func(t *testing.T) {
-			got := checkString(tt.in)
+			got := checkString2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
