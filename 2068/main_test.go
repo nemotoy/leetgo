@@ -27,8 +27,24 @@ func checkAlmostEquivalent(word1 string, word2 string) bool {
 	return true
 }
 
+func checkAlmostEquivalent2(word1 string, word2 string) bool {
+	cnt := [26]int{}
+	for _, w := range word1 {
+		cnt[w-'a']++
+	}
+	for _, w := range word2 {
+		cnt[w-'a']--
+	}
+	for i := 0; i < 26; i++ {
+		if abs(cnt[i]) > 3 {
+			return false
+		}
+	}
+	return true
+}
+
 func abs(x int) int {
-	if x < 1 {
+	if x < 0 {
 		return -x
 	}
 	return x
@@ -52,7 +68,7 @@ func TestCheckAlmostEquivalent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%s, %s", tt.in, tt.in2), func(t *testing.T) {
-			got := checkAlmostEquivalent(tt.in, tt.in2)
+			got := checkAlmostEquivalent2(tt.in, tt.in2)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
