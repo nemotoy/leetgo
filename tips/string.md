@@ -112,6 +112,12 @@ func reverse(s string) string {
 	return string(runes)
 }
 
+// substring/部分文字列
+for i := 0; i < l; i++ {
+	for j := i; j < l && isXxx(); j++ {
+	}
+}
+
 /*
   ## TODO
   - 文字列の出現回数
