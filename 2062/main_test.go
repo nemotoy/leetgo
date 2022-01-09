@@ -30,6 +30,40 @@ func countVowelSubstrings(word string) int {
 	return ret
 }
 
+/*
+
+ */
+func countVowelSubstrings2(word string) int {
+	j, k, vow, ret := 0, 0, 0, 0
+	m := map[byte]int{
+		'a': 0,
+		'e': 0,
+		'i': 0,
+		'o': 0,
+		'u': 0,
+	}
+	for i := 0; i < len(word); i++ {
+		if _, ok := m[word[i]]; ok {
+			m[word[i]]++
+			if m[word[i]] == 1 {
+				vow++
+			}
+			for vow == 5 {
+				m[word[k]]--
+				if m[word[k]] == 0 {
+					vow--
+				}
+				k++
+			}
+			ret += (k - j)
+		} else {
+			m['a'], m['e'], m['i'], m['o'], m['u'], vow = 0, 0, 0, 0, 0, 0
+			j, k = i+1, i+1
+		}
+	}
+	return ret
+}
+
 func isVowel(s byte) bool {
 	return s == 'a' || s == 'e' || s == 'i' || s == 'o' || s == 'u'
 }
@@ -54,7 +88,7 @@ func TestCountVowelSubstrings(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%v", tt.in), func(t *testing.T) {
-			got := countVowelSubstrings(tt.in)
+			got := countVowelSubstrings2(tt.in)
 			if !reflect.DeepEqual(got, tt.out) {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
