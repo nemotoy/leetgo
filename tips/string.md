@@ -118,6 +118,11 @@ for i := 0; i < l; i++ {
 	}
 }
 
+// 文字列が整数か
+num, err := strconv.Atoi(v)
+if err == nil {
+}
+
 /*
   ## TODO
   - 文字列の出現回数

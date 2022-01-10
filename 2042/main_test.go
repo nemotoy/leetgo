@@ -28,6 +28,22 @@ func areNumbersAscending(s string) bool {
 	return true
 }
 
+func areNumbersAscending2(s string) bool {
+	ss := strings.Split(s, " ")
+	tmp := 0
+	for _, v := range ss {
+		num, err := strconv.Atoi(v)
+		if err == nil {
+			if tmp < num {
+				tmp = num
+			} else {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 func TestAreNumbersAscending(t *testing.T) {
 	tests := []struct {
 		in  string
@@ -42,7 +58,7 @@ func TestAreNumbersAscending(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.in, func(t *testing.T) {
-			got := areNumbersAscending(tt.in)
+			got := areNumbersAscending2(tt.in)
 			if got != tt.out {
 				t.Errorf("got: %v, want: %v", got, tt.out)
 			}
