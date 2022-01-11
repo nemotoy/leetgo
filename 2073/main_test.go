@@ -1,3 +1,4 @@
+// nolint:gocritic
 package main
 
 import (
@@ -22,6 +23,23 @@ func timeRequiredToBuy(tickets []int, k int) int {
 			if tickets[k] == 0 {
 				return time
 			}
+		}
+	}
+	return time
+}
+
+// 列のチケット数より少ない場合は、indexのチケット数購入する
+// 上記以外で、列より前の場合は、列のチケット数分購入。列より後ろの場合は、列のチケット数より1枚少なく購入
+func timeRequiredToBuy2(tickets []int, k int) int {
+	time := 0
+	ticket := tickets[k]
+	for i := 0; i < len(tickets); i++ {
+		if tickets[i] < ticket {
+			time += tickets[i]
+		} else if i <= k {
+			time += ticket
+		} else if i > k {
+			time += ticket - 1
 		}
 	}
 	return time
