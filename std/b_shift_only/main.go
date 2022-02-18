@@ -9,7 +9,7 @@ func main() {
 	fmt.Scanf("%d", &n)
 	a := make([]int, n)
 	for i := 0; i < n; i++ {
-		fmt.Scanf("%d", &a[i])
+		fmt.Scanf("%d", &a[i]) // 1行スペース毎任意個数
 	}
 	var c int
 	for {
