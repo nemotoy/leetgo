@@ -70,10 +70,21 @@ func Sum(n int) int {
 	return sum
 }
 
-// Greatest common divisor
+// 最大公約数
 func Gcd(a, b int) int {
 	if b == 0 {
 		return a
 	}
 	return Gcd(b, a%b)
 }
+
+// 階乗
+func Factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * Factorial(n-1)
+}
+
+// 累乗
+// math.Pow10(5))
