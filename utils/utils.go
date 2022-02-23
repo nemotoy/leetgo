@@ -70,6 +70,14 @@ func Sum(n int) int {
 	return sum
 }
 
+func SumAsStr(s string) int {
+	sum := 0
+	for i := 0; i < len(s); i++ {
+		sum += int(s[i]) - '0'
+	}
+	return sum
+}
+
 // 最大公約数
 func Gcd(a, b int) int {
 	if b == 0 {

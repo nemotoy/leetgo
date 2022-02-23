@@ -28,4 +28,11 @@ func main() {
 		fmt.Scan(&t[i], &x[i], &y[i])
 	}
 }
+
+// 1行を文字列で取得
+func main() {
+	sc := bufio.NewScanner(os.Stdin)
+	sc.Scan()
+	text := sc.Text()
+}
 ```
