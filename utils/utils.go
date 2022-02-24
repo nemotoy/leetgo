@@ -40,6 +40,27 @@ func ReverseString(s string) string {
 	return string(runes)
 }
 
+func ReverseSubString(s string, a, b int) string {
+	runes := []rune(s[a : b+1])
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return s[:a] + string(runes) + s[b+1:]
+}
+
+func ReplaceSubString(s string, a, b int, p string) string {
+	return s[:a] + p + s[b+1:]
+}
+
+func BiggerLexicographical(a, b string) string {
+	if a > b {
+		return a
+	} else if a < b {
+		return b
+	}
+	return ""
+}
+
 func Max(x, y int) int {
 	if x < y {
 		return y
