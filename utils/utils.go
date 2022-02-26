@@ -91,6 +91,42 @@ func Sum(n int) int {
 	return sum
 }
 
+// 整数の桁数
+func numOfDigit(n int) int {
+	cnt := 0
+	for n > 0 {
+		n /= 10
+		cnt++
+	}
+	return cnt
+}
+
+// 約数
+func numOfDivisor(n int) int {
+	divisor := 0
+	for i := 1; i <= n; i++ {
+		if n%i == 0 {
+			divisor++
+		}
+	}
+	return divisor
+}
+
+// 公約数
+func commonDivisor(a, b int) int {
+	min := a
+	if a > b {
+		min = b
+	}
+	cnt := 0
+	for i := 1; i <= min; i++ {
+		if a%i == 0 && b%i == 0 {
+			cnt++
+		}
+	}
+	return cnt
+}
+
 func SumAsStr(s string) int {
 	sum := 0
 	for i := 0; i < len(s); i++ {
