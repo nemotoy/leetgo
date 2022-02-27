@@ -92,7 +92,7 @@ func Sum(n int) int {
 }
 
 // 整数の桁数
-func numOfDigit(n int) int {
+func NumOfDigit(n int) int {
 	cnt := 0
 	for n > 0 {
 		n /= 10
@@ -102,7 +102,7 @@ func numOfDigit(n int) int {
 }
 
 // 約数
-func numOfDivisor(n int) int {
+func NumOfDivisor(n int) int {
 	divisor := 0
 	for i := 1; i <= n; i++ {
 		if n%i == 0 {
@@ -113,7 +113,7 @@ func numOfDivisor(n int) int {
 }
 
 // 公約数
-func commonDivisor(a, b int) int {
+func CommonDivisor(a, b int) int {
 	min := a
 	if a > b {
 		min = b
