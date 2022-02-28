@@ -52,6 +52,12 @@ func ReplaceSubString(s string, a, b int, p string) string {
 	return s[:a] + p + s[b+1:]
 }
 
+func ReplaceAtIndex(in string, r rune, i int) string {
+	out := []rune(in)
+	out[i] = r
+	return string(out)
+}
+
 func BiggerLexicographical(a, b string) string {
 	if a > b {
 		return a
