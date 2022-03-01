@@ -36,3 +36,15 @@ func main() {
 	text := sc.Text()
 }
 ```
+
+## FormatInt
+
+```golang
+var k int64
+// binary
+strconv.FormatInt(k, 2)
+// decimal
+strconv.FormatInt(k, 10)
+// hexadecimal
+strconv.FormatInt(k, 16)
+```
