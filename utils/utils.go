@@ -67,6 +67,15 @@ func BiggerLexicographical(a, b string) string {
 	return ""
 }
 
+// 対象indexの文字コード差分を返す
+func DiffCodeByIndex(a, b string, i int) rune {
+	aa, bb := a[i], b[i]
+	if aa < bb {
+		return rune((bb - aa + 26) % 26)
+	}
+	return rune((aa - bb + 26) % 26)
+}
+
 func Max(x, y int) int {
 	if x < y {
 		return y
