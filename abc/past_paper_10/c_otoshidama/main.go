@@ -9,9 +9,10 @@ func main() {
 	x, y, z := -1, -1, -1
 	for xi := 0; xi <= a; xi++ {
 		for yi := 0; yi <= a; yi++ {
+			// x,yが決まればzは決まる
 			zi := a - xi - yi
 			total := 10000*xi + 5000*yi + 1000*zi
-			if (xi+yi+zi == a) && (total == b) {
+			if total == b {
 				x, y, z = xi, yi, zi
 				break
 			}

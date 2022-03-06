@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// コインからX円にする方法は何通りか
 func main() {
 	var a, b, c, x int
 	fmt.Scan(&a, &b, &c, &x)

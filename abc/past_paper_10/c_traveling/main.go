@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	var n int
-	fmt.Scanf("%d", &n)
+	fmt.Scan(&n)
 
 	t, x, y := [110000]int{}, [110000]int{}, [110000]int{}
 	for i := 0; i < n; i++ {

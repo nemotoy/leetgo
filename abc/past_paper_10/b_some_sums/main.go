@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	var n, a, b int
-	fmt.Scanln(&n, &a, &b) // 1行スペース毎
+	fmt.Scanln(&n, &a, &b)
 	res := 0
 	for i := 1; i <= n; i++ {
 		sum := calcSumOfDigits(i)

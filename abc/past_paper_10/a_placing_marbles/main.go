@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// 0 と 1 のみから成る 3 桁の番号 s に含まれる1の個数
 func main() {
 	var s string
 	fmt.Scan(&s)
