@@ -166,5 +166,21 @@ func Factorial(n int) int {
 	return n * Factorial(n-1)
 }
 
+// keyに該当するindexを返す二分探索。aはソート済み配列。該当しない場合は-1を返す。
+func BinarySearchInts(a []int, key int) int {
+	left, right := 0, len(a)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if a[mid] == key {
+			return mid
+		} else if a[mid] > key {
+			right = mid - 1
+		} else if a[mid] < key {
+			left = mid + 1
+		}
+	}
+	return -1
+}
+
 // 累乗
 // math.Pow10(5))
