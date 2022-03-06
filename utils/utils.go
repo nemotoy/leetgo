@@ -166,6 +166,21 @@ func Factorial(n int) int {
 	return n * Factorial(n-1)
 }
 
+// 回文
+func IsPalindromeInt(x int) bool {
+	if x < 0 {
+		return false
+	}
+	tmp := x
+	rev := 0
+	for x != 0 {
+		pop := x % 10
+		x /= 10
+		rev = rev*10 + pop
+	}
+	return rev == tmp
+}
+
 // keyに該当するindexを返す二分探索。aはソート済み配列。該当しない場合は-1を返す。
 func BinarySearchInts(a []int, key int) int {
 	left, right := 0, len(a)-1
