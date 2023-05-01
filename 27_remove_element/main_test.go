@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// valと等価でない値の個数kを返し、numsは先頭からk個分valと等価でない要素が含まれるようにする
 func removeElement(nums []int, val int) int {
 	index := 0
 	for i := 0; i < len(nums); i++ {
